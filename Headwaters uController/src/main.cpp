@@ -3,7 +3,11 @@
 #include <Timer.h>
 #include <Adafruit_Thermal.h>
 #include <testTube.h>
+#include <Bounce2.h>
 
+MoToTimer buttonLockoutTimer;
+
+uint16_t btnLockTime = 250; 
 
 //setup print to hardware serial
 //RX0 TX1
@@ -14,7 +18,12 @@ void setup() {
 }
 
 void loop() {
-  // Print the 75x75 pixel logo in adalogo.h:
+
   printer.printBitmap(tubeWidth, tubeHeight, testTube);
+  if(testbutton.ispressed() && testAllow)
+  {
+    //print!
+  }
+  printer.availableForWrite();
 
 }
