@@ -30,6 +30,25 @@ Bounce2::Button button1 = Bounce2::Button();
 // Define the array of LEDs
 CRGB ledStrip[NUM_LEDS];
 
+void printerTest(){
+    printer.setFont('A');
+    printer.setSize('S');
+    printer.println("This is font A in size S");
+    printer.setSize('M');
+    printer.println("This is font A in size M");
+    printer.setSize('L');
+    printer.println("This is font A in size L");
+
+    printer.setFont('B');
+    printer.setSize('S');
+    printer.println("This is font B in size S");
+    printer.setSize('M');
+    printer.println("This is font B in size M");
+    printer.setSize('L');
+    printer.println("This is font B in size L");
+    printer.feed(3);
+}
+
 void setup() {
   FastLED.addLeds<NEOPIXEL, LED_PIN1>(ledStrip, NUM_LEDS);
 
@@ -57,10 +76,6 @@ void loop() {
   // must update button every loop
   button1.update();
 
-  // initial LED is ? or only blue when button is pushed? 
-  // led[#] CRGB:: ? ;
-  // FastLED.show();
-
   if(button1.pressed()){
     Serial.println("Button was pressed!");
 
@@ -75,33 +90,14 @@ void loop() {
       delay(100);
     }
 
-    printer.boldOn();
+    printer.setSize('M');
     printer.println("Sampling Location 1");
     printer.println("Data at outlet of Stream 1");
-    printer.boldOff();
+    printer.setSize('S');
     printer.println("O numbers: is this supposed to be oxygen?");
     printer.println("Isotope count: like so many");
 
-
-    printer.printBitmap(QRWidth, QRHeight, OMSI_QR);
+    //printer.printBitmap(QRWidth, QRHeight, OMSI_QR);
     printer.feed(5);
-  }
-
-
-  // if(button1.pressed() && printer.availableForWrite())
-  // {
-  //   // LED stream
-  //   //led[#] = CRGB::Blue;
-  //   //FastLED.show();
-  //   // print O^#, isotopes and QR code pointing to OMSI website
-  //   printer.boldOn();
-  //   printer.println("O numbers: #");
-  //   printer.boldOff();
-
-  //   printer.boldOn();
-  //   printer.println("Isotope count: ");
-  //   printer.boldOff();
-
-  //   printer.printBitmap(QRWidth, QRHeight, OMSI_QR);
-  // }
+    }
 }
