@@ -1,11 +1,8 @@
 #include <Arduino.h>
 #include <FastLED.h>
 #include <Bounce2.h>
-#include <Adafruit_Thermal.h>
+#include <printFunctions.h>
 #include <Timer.h>
-#include <testTube.h>
-#include <calicoTestTube.h>
-#include <OMSI_QR.h>
 
 //uint16_t btnLockTime = 250; 
 
@@ -22,56 +19,11 @@ Bounce2::Button button1 = Bounce2::Button();
 
 // define the array of LEDs
 CRGB ledStrip[NUM_LEDS];
-
-void printerTest(){
-  // just a function to print the different font and size options
-  printer.setFont('A');
-  printer.setSize('S');
-  printer.println("This is font A in size S");
-  printer.setSize('M');
-  printer.println("This is font A in size M");
-  printer.setSize('L');
-  printer.println("This is font A in size L");
-
-  printer.setFont('B');
-  printer.setSize('S');
-  printer.println("This is font B in size S");
-  printer.setSize('M');
-  printer.println("This is font B in size M");
-  printer.setSize('L');
-  printer.println("This is font B in size L");
-  printer.feed(3);
-}
-
-void printCurrentSample(int location, int stream, float isoCount, float temp, float dissolvedOxy){
-    printer.setFont('B');
-    printer.setSize('s');
-
-    printer.print("Sample Location: ");
-    printer.print(location);
-    printer.println();
-
-    printer.print("Stream: ");
-    printer.print(stream);
-    printer.println();
-
-    printer.print("Isotope count: ");
-    printer.print(isoCount);
-    printer.println();
-
-    printer.print("Temperature: ");
-    printer.print(temp);
-    printer.println();
-
-    printer.print("Oxygen dissolved: ");
-    printer.print(dissolvedOxy);
-    printer.println();
-}
-
-void printQR(){
-  printer.printBitmap(QRWidth, QRHeight, OMSI_QR);
-  printer.feed(4);
-}
+int location = 0;
+int stream = 0;
+float isoCount = 0.0;
+float temperature = 0.0;
+float dissolvedOxy = 0.0;
 
 void setup() {
   FastLED.addLeds<NEOPIXEL, LED_PIN1>(ledStrip, NUM_LEDS);
@@ -99,6 +51,8 @@ void loop() {
   button1.update();
 
   if(button1.pressed()){
+    location = 1;
+    stream = 1;
     // create a blue "stream" on the LED strip 
     for(int i = 0; i < NUM_LEDS + 1; i++){
       fill_solid(ledStrip, i, CRGB::Blue);
@@ -109,11 +63,11 @@ void loop() {
     for(int i = 0; i < NUM_LEDS + 1; i++){
       fill_solid(ledStrip, i, CRGB::Black);
       FastLED.show();
-      delay(100);
+      delay(80);
     }
 
-    printCurrentSample(1, 1, 20.7, 72, 7);
-    printQR();
+    printCurrentSample(printer, location, stream, 20.7, 72, 7);
+    printQR(printer);
     printer.feed(3);
   }
 }
