@@ -1,9 +1,10 @@
 #include <Arduino.h>
 #include <FastLED.h>
-#include <Timer.h>
-#include <Adafruit_Thermal.h>
-#include <testTube.h>
 #include <Bounce2.h>
+#include <Adafruit_Thermal.h>
+#include <Timer.h>
+#include <testTube.h>
+#include <calicoTestTube.h>
 #include <OMSI_QR.h>
 
 //uint16_t btnLockTime = 250; 
@@ -113,5 +114,6 @@ void loop() {
 
     printCurrentSample(1, 1, 20.7, 72, 7);
     printQR();
+    printer.feed(3);
   }
 }
