@@ -50,21 +50,29 @@ void printerTest(){
 }
 
 // last three variables need to be floats
-void printSample(int location, int stream, int isoCount, int temp, int dissolvedOxy){
+void printSample(int location, int stream, float isoCount, int temp, int dissolvedOxy){
     printer.setFont('B');
-    printer.setSize('M');
-    printer.println("Sample Location: ");
+    printer.setSize('s');
+    printer.print("Sample Location: ");
     printer.print(location);
-    printer.println("Stream: " + stream);
-    printer.setSize('S');
-    printer.println("Isotope count: " + isoCount);
-    printer.println("Temperature: " + temp);
-    printer.println("Oxygen dissolved: " + dissolvedOxy);
-    printer.feed(5);
+    printer.println();
+    printer.print("Stream: ");
+    printer.print(stream);
+    printer.println();
+    printer.print("Isotope count: ");
+    printer.print(isoCount);
+    printer.println();
+    printer.print("Temperature: ");
+    printer.print(temp);
+    printer.println();
+    printer.print("Oxygen dissolved: ");
+    printer.print(dissolvedOxy);
+    printer.println();
 }
 
 void printQR(){
   printer.printBitmap(QRWidth, QRHeight, OMSI_QR);
+  printer.feed(4);
 }
 
 void setup() {
@@ -107,17 +115,7 @@ void loop() {
       FastLED.show();
       delay(100);
     }
-    printSample(1, 1, 20, 72, 7);
-
-    // printer.setSize('M');
-    // printer.println("Sampling Location 1");
-    // printer.println("Data at outlet of Stream 1");
-    // printer.setSize('S');
-    // printer.println("O numbers: is this supposed to be oxygen?");
-    // printer.println("Isotope count: like so many");
-
-    //printer.printBitmap(QRWidth, QRHeight, OMSI_QR);
-    //printer.feed(4);
-    }
+    printSample(1, 1, 20.7, 72, 7);
+    printQR();
+  }
 }
-
