@@ -33,7 +33,7 @@ void printCurrentSample(Adafruit_Thermal &printer, uint16_t elv, uint8_t oxy){
     printer.print(elv);
     printer.println();
 
-    printer.print("Oxygen 18: ");
+    printer.print("Oxygen-18: ");
     printer.print(oxy);
     printer.println();
 }
@@ -46,24 +46,24 @@ void printQR(Adafruit_Thermal &printer){
 void normalConditions(Adafruit_Thermal &printer, uint8_t strm, char rvr){
     printer.setFont('B');
     printer.setSize('S');
-    printer.println("Normal Conditions");
+    printer.println("Climate Condition: Normal");
     if(strm == 1){
         printer.print("Stream Location: ");
         printer.print(strm);
         printer.println();
-        printer.println("Landscape Type: Lava Flows");
+        printer.println("Landscape: Lava Flows");
         printCurrentSample(printer, 1200, 1);
     } else if(strm == 2){
         printer.print("Stream Location: ");
         printer.print(strm);
         printer.println();
-        printer.println("Landscape Type: Earthflows");
+        printer.println("Landscape: Earthflows");
         printCurrentSample(printer, 950, 4);
     } else if(strm == 3){
         printer.print("Stream Location: ");
         printer.print(strm);
         printer.println();
-        printer.println("Landscape Type: Weathered Bedrock");
+        printer.println("Landscape: Weathered Bedrock");
         printCurrentSample(printer, 700, 6);
     }
 
@@ -88,24 +88,24 @@ void normalConditions(Adafruit_Thermal &printer, uint8_t strm, char rvr){
 void snowConditions(Adafruit_Thermal &printer, uint8_t strm, char rvr){
     printer.setFont('B');
     printer.setSize('S');
-    printer.println("High Snowpack Conditions");
+    printer.println("Climate Condition: High Snowpack");
     if(strm == 1){
         printer.print("Stream Location: ");
         printer.print(strm);
         printer.println();
-        printer.println("Landscape Type: Lava Flows");
+        printer.println("Landscape: Lava Flows");
         printCurrentSample(printer, 1200, 1);
     } else if(strm == 2){
         printer.print("Stream Location: ");
         printer.print(strm);
         printer.println();
-        printer.println("Landscape Type: Earthflows");
+        printer.println("Landscape: Earthflows");
         printCurrentSample(printer, 950, 3);
     } else if(strm == 3){
         printer.print("Stream Location: ");
         printer.print(strm);
         printer.println();
-        printer.println("Landscape Type: Weathered Bedrock");
+        printer.println("Landscape: Weathered Bedrock");
         printCurrentSample(printer, 700, 5);
     }
 
@@ -130,24 +130,24 @@ void snowConditions(Adafruit_Thermal &printer, uint8_t strm, char rvr){
 void droughtConditions(Adafruit_Thermal &printer, uint8_t strm, char rvr){
     printer.setFont('B');
     printer.setSize('S');
-    printer.println("Drought Conditions");
+    printer.println("Climate Condition: Drought");
     if(strm == 1){
         printer.print("Stream Location: ");
         printer.print(strm);
         printer.println();
-        printer.println("Landscape Type: Lava Flows");
+        printer.println("Landscape: Lava Flows");
         printCurrentSample(printer, 1200, 3);
     } else if(strm == 2){
         printer.print("Stream Location: ");
         printer.print(strm);
         printer.println();
-        printer.println("Landscape Type: Earthflows");
+        printer.println("Landscape: Earthflows");
         printCurrentSample(printer, 950, 6);
     } else if(strm == 3){
         printer.print("Stream Location: ");
         printer.print(strm);
         printer.println();
-        printer.println("Landscape Type: Weathered Bedrock");
+        printer.println("Landscape: Weathered Bedrock");
         printCurrentSample(printer, 700, 9);
     }
 
