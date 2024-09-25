@@ -19,11 +19,8 @@ Bounce2::Button button1 = Bounce2::Button();
 
 // define the array of LEDs
 CRGB ledStrip[NUM_LEDS];
-int location = 0;
-int stream = 0;
-float isoCount = 0.0;
-float temperature = 0.0;
-float dissolvedOxy = 0.0;
+uint8_t stream = 0;
+char river = 'X';
 
 void setup() {
   FastLED.addLeds<NEOPIXEL, LED_PIN1>(ledStrip, NUM_LEDS);
@@ -51,13 +48,14 @@ void loop() {
   button1.update();
 
   if(button1.pressed()){
-    location = 1;
     stream = 1;
+    river = 'X';
+
     // create a blue "stream" on the LED strip 
     for(int i = 0; i < NUM_LEDS + 1; i++){
       fill_solid(ledStrip, i, CRGB::Blue);
       FastLED.show();
-      delay(100);
+      delay(80);
     }
 
     for(int i = 0; i < NUM_LEDS + 1; i++){
@@ -66,8 +64,9 @@ void loop() {
       delay(80);
     }
 
-    printCurrentSample(printer, location, stream, 20.7, 72, 7);
-    printQR(printer);
-    printer.feed(3);
+    //normalConditions(printer, stream, river);
+    //snowConditions(printer, stream, river);
+    droughtConditions(printer, 0, 'B');
+    //printQR(printer);
   }
 }
