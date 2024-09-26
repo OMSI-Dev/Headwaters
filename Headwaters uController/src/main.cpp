@@ -1,8 +1,9 @@
 #include <Arduino.h>
-//#include <FastLED.h>
 #include <Bounce2.h>
 #include <printFunctions.h>
+#include <ledModes.h>
 #include <haxx.h>
+#include <ledStreams.h>
 
 //uint16_t btnLockTime = 250; 
 
@@ -34,7 +35,7 @@ char river = 'X';
 // 0 = normal
 // 1 = high snowpack
 // 2 = drought
-uint8_t climateCondition = 0;
+uint8_t climateCondition = -1;
 
 void setup() {
   FastLED.addLeds<NEOPIXEL, LED_PIN1>(ledStrip, NUM_LEDS_STRIP);
@@ -63,39 +64,11 @@ void setup() {
 
 void loop() {
   button1.update();
-
-  // TRYING THE RING LED
-  //circleLED.centerFill(255, 0, 0);
-    // for(int i = 0; i < NUM_LEDS_RING + 1; i++){
-    //   fill_solid(ledRing, i, CRGB::Blue);
-    //   FastLED.show();
-    //   delay(250);
-    // }
-
-  // for(int i = 0; i < NUM_LEDS_RING + 1; i++){
-  //   fill_solid(ledRing, i, CRGB::Blue);
-  //   FastLED.show();
-  //   delay(80);
-  // }
-
-  // for(int i = 0; i < NUM_LEDS_RING + 1; i++){
-  //   fill_solid(ledRing, i, CRGB::Black);
-  //   FastLED.show();
-  //   delay(80);
-  // }
-
-  // for(int i = 0; i < NUM_LEDS_STRIP + 1; i++){
-  //   fill_solid(ledStrip, i, CRGB::Green);
-  //   FastLED.show();
-  //   delay(80);
-  // }
-
-  // for(int i = 0; i < NUM_LEDS_STRIP + 1; i++){
-  //   fill_solid(ledStrip, i, CRGB::Black);
-  //   FastLED.show();
-  //   delay(80);
-  // }
-
+  if(climateCondition == 0){
+    pacifica_loop(ledRing);
+    FastLED.show();
+  }
+  
   // button pressed to change the climate condition
   // should be first thing checked every loop?
   if(button1.pressed()){
@@ -108,118 +81,102 @@ void loop() {
     switch(climateCondition){
       case 0:
         Serial.println("Climate Condition: Normal");
+        pacifica_loop(ledRing);
+        FastLED.show();
         //normalConditions(printer, stream, river);
         //printQR(printer);
         break;
       case 1:
         Serial.println("Climate Conditions: High Snowpack");
+        fill_solid(ledRing, NUM_LEDS_RING + 1, CRGB::Black);
+        snowpack(ledRing);
+        FastLED.show();
         //snowConditions(printer, stream, river);
         //printerQR(printer);
         break;
       case 2:
         Serial.println("Climate Conditions: Dought");
+        fill_solid(ledRing, NUM_LEDS_RING + 1, CRGB::Black);
+        drought(ledRing);
+        FastLED.show(); // display this frame
         //droughtConditions(printer, stream, river);
         //printQR(printer);
         break;
     }
   }
 
-  // // DEMO MODE
-  // if(button1.pressed()){
-  //   switch(mode){
-  //     case 0:
-  //       stream = 2;
-  //       river = 'X';
-  //       for(int i = 0; i < NUM_LEDS_STRIP + 1; i++){
-  //         fill_solid(ledStrip, i, CRGB::Green);
-  //         FastLED.show();
-  //         delay(80);
-  //       }
+  //blue_stream(ledStrip, NUM_LEDS_STRIP);
+}
 
-  //       for(int i = 0; i < NUM_LEDS_STRIP + 1; i++){
-  //         fill_solid(ledStrip, i, CRGB::Black);
-  //         FastLED.show();
-  //         delay(80);
-  //       }
+void demo(){
+   // DEMO from video
+   // will have to put back into main loop
+   // before using I think
+  uint8_t mode = 0;
+  if(button1.pressed()){
+    switch(mode){
+      case 0:
+        stream = 2;
+        river = 'X';
+        for(int i = 0; i < NUM_LEDS_STRIP + 1; i++){
+          fill_solid(ledStrip, i, CRGB::Green);
+          FastLED.show();
+          delay(80);
+        }
 
-  //       normalConditions(printer, stream, river);
-  //       printer.feed(4);
-  //       break;
+        for(int i = 0; i < NUM_LEDS_STRIP + 1; i++){
+          fill_solid(ledStrip, i, CRGB::Black);
+          FastLED.show();
+          delay(80);
+        }
 
-  //     case 1:
-  //       stream = 0;
-  //       river = 'A';
-  //       for(int i = 0; i < NUM_LEDS_STRIP + 1; i++){
-  //         fill_solid(ledStrip, i, CRGB::Blue);
-  //         FastLED.show();
-  //         delay(80);
-  //       }
+        normalConditions(printer, stream, river);
+        printer.feed(4);
+        break;
 
-  //       for(int i = 0; i < NUM_LEDS_STRIP + 1; i++){
-  //         fill_solid(ledStrip, i, CRGB::Black);
-  //         FastLED.show();
-  //         delay(80);
-  //       }
+      case 1:
+        stream = 0;
+        river = 'A';
+        for(int i = 0; i < NUM_LEDS_STRIP + 1; i++){
+          fill_solid(ledStrip, i, CRGB::Blue);
+          FastLED.show();
+          delay(80);
+        }
 
-  //       snowConditions(printer, stream, river);
-  //       printer.feed(4);
-  //       break;
+        for(int i = 0; i < NUM_LEDS_STRIP + 1; i++){
+          fill_solid(ledStrip, i, CRGB::Black);
+          FastLED.show();
+          delay(80);
+        }
+
+        snowConditions(printer, stream, river);
+        printer.feed(4);
+        break;
       
-  //     case 2:
-  //       stream = 3;
-  //       river = 'X';
-  //       for(int i = 0; i < NUM_LEDS_STRIP + 1; i++){
-  //         fill_solid(ledStrip, i, CRGB::Red);
-  //         FastLED.show();
-  //         delay(80);
-  //       }
+      case 2:
+        stream = 3;
+        river = 'X';
+        for(int i = 0; i < NUM_LEDS_STRIP + 1; i++){
+          fill_solid(ledStrip, i, CRGB::Red);
+          FastLED.show();
+          delay(80);
+        }
 
-  //       for(int i = 0; i < NUM_LEDS_STRIP + 1; i++){
-  //         fill_solid(ledStrip, i, CRGB::Black);
-  //         FastLED.show();
-  //         delay(80);
-  //       }
+        for(int i = 0; i < NUM_LEDS_STRIP + 1; i++){
+          fill_solid(ledStrip, i, CRGB::Black);
+          FastLED.show();
+          delay(80);
+        }
 
-  //       droughtConditions(printer, stream, river);
-  //       printer.feed(4);
-  //       break;
-  //   }
-  //   mode++;
-  // }
-    // if(mode == 3){
-    //   printQR(printer);
-    //   mode++;
-    // }
+        droughtConditions(printer, stream, river);
+        printer.feed(4);
+        break;
+    }
+    mode++;
+  }
+    if(mode == 3){
+      printQR(printer);
+      mode++;
+    }
 
-  //   // REGULAR CODE 
-  //   stream = 1;
-  //   river = 'X';
-
-  //   // create a blue "stream" on the LED strip 
-  //   for(int i = 0; i < NUM_LEDS_STRIP + 1; i++){
-  //     fill_solid(ledStrip, i, CRGB::Blue);
-  //     FastLED.show();
-  //     delay(80);
-  //   }
-
-  //   for(int i = 0; i < NUM_LEDS_STRIP + 1; i++){
-  //     fill_solid(ledStrip, i, CRGB::Black);
-  //     FastLED.show();
-  //     delay(80);
-  //   }
-
-      // switch(climateCondition){
-      //   case 0:
-      //     normalConditions(printer, stream, river);
-      //     printQR(printer);
-      //     break;
-      //   case 1:
-      //     snowConditions(printer, stream, river);
-      //     printQR(printer);
-      //     break;
-      //   case 2:
-      //     droughtConditions(printer, stream, river);
-      //     printQR(printer);
-      //     break;
-      // }
 }

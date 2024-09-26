@@ -5,6 +5,11 @@
 #include <testTube.h>
 #include <calicoTestTube.h>
 
+// Calico September 25th, 2024
+// Header file to store the print functions for
+// the thermal printer. Includes a test, WR codes, 
+// and the different climate conditions. 
+
 void printerTest(Adafruit_Thermal &printer){
   // just a function to print the different font and size options
   printer.setFont('A');
