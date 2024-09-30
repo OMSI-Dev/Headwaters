@@ -21,7 +21,7 @@ void blueStream(CRGB *ledStrip, uint8_t NUM_LEDS_STRIP){
 }
 
 void greenStream(CRGB *ledStrip, uint8_t NUM_LEDS_STRIP){
-    // create a blue "stream" on the LED strip 
+    // create a green "stream" on the LED strip 
     for(int i = 0; i < NUM_LEDS_STRIP + 1; i++){
       fill_solid(ledStrip, i, CRGB::Green);
       FastLED.show();
@@ -36,7 +36,7 @@ void greenStream(CRGB *ledStrip, uint8_t NUM_LEDS_STRIP){
 }
 
 void redStream(CRGB *ledStrip, uint8_t NUM_LEDS_STRIP){
-    // create a blue "stream" on the LED strip 
+    // create a red "stream" on the LED strip 
     for(int i = 0; i < NUM_LEDS_STRIP + 1; i++){
       fill_solid(ledStrip, i, CRGB::Red);
       FastLED.show();
