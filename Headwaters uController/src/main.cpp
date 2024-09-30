@@ -105,7 +105,7 @@ void loop() {
     }
   }
 
-  //blue_stream(ledStrip, NUM_LEDS_STRIP);
+  //blueStream(ledStrip, NUM_LEDS_STRIP);
 }
 
 void demo(){
@@ -118,57 +118,24 @@ void demo(){
       case 0:
         stream = 2;
         river = 'X';
-        for(int i = 0; i < NUM_LEDS_STRIP + 1; i++){
-          fill_solid(ledStrip, i, CRGB::Green);
-          FastLED.show();
-          delay(80);
-        }
-
-        for(int i = 0; i < NUM_LEDS_STRIP + 1; i++){
-          fill_solid(ledStrip, i, CRGB::Black);
-          FastLED.show();
-          delay(80);
-        }
-
-        normalConditions(printer, stream, river);
+        greenStream(ledStrip, NUM_LEDS_STRIP);
+        printNormalConditions(printer, stream, river);
         printer.feed(4);
         break;
 
       case 1:
         stream = 0;
         river = 'A';
-        for(int i = 0; i < NUM_LEDS_STRIP + 1; i++){
-          fill_solid(ledStrip, i, CRGB::Blue);
-          FastLED.show();
-          delay(80);
-        }
-
-        for(int i = 0; i < NUM_LEDS_STRIP + 1; i++){
-          fill_solid(ledStrip, i, CRGB::Black);
-          FastLED.show();
-          delay(80);
-        }
-
-        snowConditions(printer, stream, river);
+        blueStream(ledStrip, NUM_LEDS_STRIP);
+        printSnowConditions(printer, stream, river);
         printer.feed(4);
         break;
       
       case 2:
         stream = 3;
         river = 'X';
-        for(int i = 0; i < NUM_LEDS_STRIP + 1; i++){
-          fill_solid(ledStrip, i, CRGB::Red);
-          FastLED.show();
-          delay(80);
-        }
-
-        for(int i = 0; i < NUM_LEDS_STRIP + 1; i++){
-          fill_solid(ledStrip, i, CRGB::Black);
-          FastLED.show();
-          delay(80);
-        }
-
-        droughtConditions(printer, stream, river);
+        redStream(ledStrip, NUM_LEDS_STRIP);
+        printDroughtConditions(printer, stream, river);
         printer.feed(4);
         break;
     }

@@ -48,7 +48,7 @@ void printQR(Adafruit_Thermal &printer){
   printer.feed(4);
 }
 
-void normalConditions(Adafruit_Thermal &printer, uint8_t strm, char rvr){
+void printNormalConditions(Adafruit_Thermal &printer, uint8_t strm, char rvr){
     printer.setFont('B');
     printer.setSize('S');
     printer.println("Climate Condition: Normal");
@@ -90,7 +90,7 @@ void normalConditions(Adafruit_Thermal &printer, uint8_t strm, char rvr){
     }
 }
 
-void snowConditions(Adafruit_Thermal &printer, uint8_t strm, char rvr){
+void printSnowConditions(Adafruit_Thermal &printer, uint8_t strm, char rvr){
     printer.setFont('B');
     printer.setSize('S');
     printer.println("Climate Condition: High Snowpack");
@@ -132,7 +132,7 @@ void snowConditions(Adafruit_Thermal &printer, uint8_t strm, char rvr){
     }
 }
 
-void droughtConditions(Adafruit_Thermal &printer, uint8_t strm, char rvr){
+void printDroughtConditions(Adafruit_Thermal &printer, uint8_t strm, char rvr){
     printer.setFont('B');
     printer.setSize('S');
     printer.println("Climate Condition: Drought");
