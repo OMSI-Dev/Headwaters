@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <FastLED.h>
 
-// Calico September 26th, 2024
+// Calico created September 26th, 2024
 // Header file to keep the code to change the
 // LED ring based on which climate condition
 // mode it is in.

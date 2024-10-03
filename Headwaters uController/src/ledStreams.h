@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <FastLED.h>
 
-// Calico September 26th, 2024
+// Calico created September 26th, 2024
 // Header file to keep the code that creates the streams
 // in the LED strips.
 
