@@ -56,6 +56,7 @@ void printCurrentSample(Adafruit_Thermal &printer, uint16_t elv, uint8_t oxy){
     if(elv != 0){
         printer.print("Mean Watershed Elevation: ");
         printer.print(elv);
+        printer.print('M');
         printer.println();
     }
  
