@@ -1,15 +1,11 @@
 #include <printFunctions.h>
 #include <ledModes.h>
-#include <haxx.h>
 #include <ledStreams.h>
 #include <loadButtons.h>
  
-// setup print to hardware serial
+// Setup printer to hardware serial
 // RX0 TX1
 Adafruit_Thermal printer(&Serial2);
-
-// TRYING HAXX LIBRARY CIRCLE LED
-haxx circleLED;
 
 //MoToTimer buttonLockoutTimer;
 //uint16_t btnLockTime = 250;
@@ -19,14 +15,14 @@ haxx circleLED;
 #define LED_PIN1 15
 #define LED_PIN2 16
 
-// define the array of LEDs
+// Define the array of LEDs
 CRGB ledStrip[NUM_LEDS_STRIP];
 CRGB ledRing[NUM_LEDS_RING];
 
-// climate condition settings
-// 0 = normal
-// 1 = high snowpack
-// 2 = drought
+// Climate condition modes
+// 0 = Normal
+// 1 = High Snowpack
+// 2 = Drought
 uint8_t climateCondition = 2;
 
 void setup() {
@@ -35,9 +31,6 @@ void setup() {
 
   FastLED.setBrightness(255);
   FastLED.show();
-
-  // TRYING CIRCLE LED HAXX LIBRARY
-  circleLED.attach(16);
 
   if(setupButtons() == false){
     Serial.println("Problem with setting up buttons.");
@@ -53,15 +46,7 @@ void setup() {
 }
 
 void loop() {
-  if(updateButtons() == false){
-    Serial.println("Problem updating buttons.");
-  }
-
-  printPrecipitation(printer, 0, 1);
-  printer.feed(4);
-  printStream(printer, 2, 3);
-  printer.feed(4);
-
+  updateButtons();
 
   if(modeButton.pressed()){
     if(climateCondition == 2){
@@ -101,7 +86,7 @@ void loop() {
   }
 
   if(river3Button.pressed()){
-    printRiver(printer, climateCondition, 'B');
+    printRiver(printer, climateCondition, 'C');
   }
 
   if(precip1Button.pressed()){
@@ -109,11 +94,11 @@ void loop() {
   }
 
   if(precip2Button.pressed()){
-    printPrecipitation(printer, climateCondition, 1);
+    printPrecipitation(printer, climateCondition, 2);
   }
 
   if(precip3Button.pressed()){
-    printPrecipitation(printer, climateCondition, 1);
+    printPrecipitation(printer, climateCondition, 3);
   }
   //printQR(printer);
 }

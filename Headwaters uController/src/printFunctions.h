@@ -7,17 +7,17 @@
 #include <deltaBMP.h>
 
 // Calico created September 25th, 2024
-// Header file to store the print functions for
-// the thermal printer. Includes a test, WR codes, 
-// and print functions for the rivers, streams, and precipitations. 
+// Store the print functions for the thermal
+// printer. Includes a test, WR codes, and 
+// print functions for the rivers, streams, and precipitations. 
 
 // Multidimensional arrays to hold the data for streams, rivers, and precipitations
+
 // Streams: 
 // Row 1 is Stream 1, 2, and 3 under normal conditions (0)
 // Row 2 is Stream 1, 2, and 3 under snowpack conditions (1)
 // Row 3 is Stream 1, 2, and 3 under drought conditions (2)
 // {climate condition, mean watershed elevation, isotope oxygen_18 levels}
-
 uint16_t streams[9][3] = {
     {0, 1200, 1}, {0, 1200, 4}, {0, 1200, 6},
     {1, 950, 1}, {1, 950, 3}, {1, 950, 5},
@@ -66,7 +66,7 @@ void printerTest(Adafruit_Thermal &printer){
   printer.feed(3);
 }
 
-// Print Sample with elevation and isotope levels
+// Print sample with elevation and isotope levels
 void printCurrentSample(Adafruit_Thermal &printer, uint16_t elv, uint8_t oxy){
     printer.setFont('B');
     printer.setSize('S');
@@ -110,6 +110,7 @@ void printPrecipitation(Adafruit_Thermal &printer, uint8_t climate, uint8_t prec
             printer.println("Climate Condition: Drought");
             break;
     }
+
     printCurrentSample(printer, precipitations[(climate*2 + climate) + (precip-1)][1], precipitations[(climate*2 + climate) + (precip-1)][2]);
 }
 
@@ -144,6 +145,7 @@ void printStream(Adafruit_Thermal &printer, uint8_t climate, uint8_t strm){
             printer.println("Landscape: Weathered Bedrock");
             break;
     }
+
     printCurrentSample(printer, streams[(climate*2 + climate) + (strm-1)][1], streams[(climate*2 + climate) + (strm-1)][2]);
 }
 
@@ -175,5 +177,6 @@ void printRiver(Adafruit_Thermal &printer, uint8_t climate, char rvr){
     } else if(rvr == 'C'){
         river = 3;
     }
+
     printCurrentSample(printer, 0, rivers[(climate*2 + climate) + (river-1)][1]);
 }
