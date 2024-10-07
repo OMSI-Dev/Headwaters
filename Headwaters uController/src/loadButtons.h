@@ -25,7 +25,7 @@ Bounce2::Button precip1Button = Bounce2::Button();
 Bounce2::Button precip2Button = Bounce2::Button();
 Bounce2::Button precip3Button = Bounce2::Button();
 
-void setupButtons(){
+bool setupButtons(){
   modeButton.attach(MODE_PIN, INPUT_PULLUP);
   stream1Button.attach(STREAM1_PIN, INPUT_PULLUP);
   stream2Button.attach(STREAM2_PIN, INPUT_PULLUP);
@@ -58,4 +58,36 @@ void setupButtons(){
   precip1Button.setPressedState(LOW);
   precip2Button.setPressedState(LOW);
   precip3Button.setPressedState(LOW);
+
+  if(modeButton.getPin() == MODE_PIN &&
+    stream1Button.getPin() == STREAM1_PIN &&
+    stream2Button.getPin() == STREAM2_PIN &&
+    stream3Button.getPin() == STREAM3_PIN &&
+    river1Button.getPin() == RIVER1_PIN &&
+    river2Button.getPin() == RIVER2_PIN &&
+    river3Button.getPin() == RIVER3_PIN &&
+    precip1Button.getPin() == PRECIP1_PIN &&
+    precip2Button.getPin() == PRECIP2_PIN &&
+    precip3Button.getPin() == PRECIP3_PIN)
+  {
+    return true;
+  }
+  return false;
+}
+
+bool updateButtons(){
+  if(modeButton.update() &&
+    stream1Button.update() &&
+    stream2Button.update() &&
+    stream3Button.update() &&
+    river1Button.update() &&
+    river2Button.update() &&
+    river3Button.update() &&
+    precip1Button.update() &&
+    precip2Button.update() &&
+    precip3Button.update())
+  {
+    return true;
+  }
+  return false;
 }

@@ -39,7 +39,9 @@ void setup() {
   // TRYING CIRCLE LED HAXX LIBRARY
   circleLED.attach(16);
 
-  setupButtons();
+  if(setupButtons() == false){
+    Serial.println("Problem with setting up buttons.");
+  }
 
   Serial.begin(115200);
   Serial2.begin(9600);
@@ -51,16 +53,9 @@ void setup() {
 }
 
 void loop() {
-  modeButton.update();
-  stream1Button.update();
-  stream2Button.update();
-  stream3Button.update();
-  river1Button.update();
-  river2Button.update();
-  river3Button.update();
-  precip1Button.update();
-  precip2Button.update();
-  precip3Button.update();
+  if(updateButtons() == false){
+    Serial.println("Problem updating buttons.");
+  }
 
   printPrecipitation(printer, 0, 1);
   printer.feed(4);
