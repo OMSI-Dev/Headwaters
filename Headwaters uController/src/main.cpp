@@ -100,5 +100,5 @@ void loop() {
   if(precip3Button.pressed()){
     printPrecipitation(printer, climateCondition, 3);
   }
-  //printQR(printer);
+  // printQR(printer);
 }

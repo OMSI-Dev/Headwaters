@@ -19,20 +19,20 @@
 // Row 3 is Stream 1, 2, and 3 under drought conditions (2)
 // {climate condition, mean watershed elevation, isotope oxygen_18 levels}
 uint16_t streams[9][3] = {
-    {0, 1200, 1}, {0, 1200, 4}, {0, 1200, 6},
-    {1, 950, 1}, {1, 950, 3}, {1, 950, 5},
-    {2, 700, 3}, {2, 700, 6}, {2, 700, 9}
+    {0, 1200, 1}, {0, 950, 4}, {0, 700, 6},
+    {1, 1200, 1}, {1, 950, 3}, {1, 700, 5},
+    {2, 1200, 3}, {2, 950, 6}, {2, 700, 9}
 };
 
 // Rivers: 
 // Row 1 is River A, B, and C under normal conditions (0)
 // Row 2 is River A, B, and C under snowpack conditions (1)
 // Row 3 is River A, B, and C under drought conditions (2)
-// {climate condition, isotope oxygen_18 levels}
-uint8_t rivers[9][2] = {
-    {0, 2}, {0, 3}, {0, 5},
-    {1, 1}, {1, 3}, {1, 4},
-    {2, 3}, {2, 5}, {2, 8}
+// {climate condition, mean watershed elevation, isotope oxygen_18 levels}
+uint8_t rivers[9][3] = {
+    {0, 1050, 2}, {0, 900, 3}, {0, 750, 5},
+    {1, 1050, 1}, {1, 900, 3}, {1, 750, 4},
+    {2, 1050, 3}, {2, 900, 5}, {2, 750, 8}
 };
 
 // Precipitation: 
@@ -41,9 +41,9 @@ uint8_t rivers[9][2] = {
 // Row 3 is Precipitation 1, 2, and 3 under drought conditions (2)
 // {climate condition, mean watershed elevation, isotope oxygen_18 levels}
 uint16_t precipitations[9][3] = {
-    {0, 400, 10}, {0, 400, 5}, {0, 400, 2},
-    {1, 800, 9}, {1, 800, 4}, {1, 800, 1},
-    {2, 1200, 12}, {2, 1200, 7}, {2, 1200, 4}
+    {0, 400, 10}, {0, 800, 5}, {0, 1200, 2},
+    {1, 400, 9}, {1, 800, 4}, {1, 1200, 1},
+    {2, 400, 12}, {2, 800, 7}, {2, 1200, 4}
 };
 
 // Print different font and size options
@@ -71,18 +71,15 @@ void printCurrentSample(Adafruit_Thermal &printer, uint16_t elv, uint8_t oxy){
     printer.setFont('B');
     printer.setSize('S');
 
-    if(elv != 0){
-        printer.print("Mean Watershed Elevation: ");
-        printer.print(elv);
-        printer.print('M');
-        printer.println();
-    }
+    printer.print("Mean Watershed Elevation: ");
+    printer.print(elv);
+    printer.print('M');
+    printer.println();
  
     printer.println("Isotope Count: ");
-    //printer.printBitmap(deltaWidth, deltaHeight, deltaBMP);
-     printer.print("O_18: ");
-     printer.print(oxy);
-     printer.println();
+    printer.print("O_18: ");
+    printer.print(oxy);
+    printer.println();
 }
 
 // Print OMSI QR code
@@ -178,5 +175,5 @@ void printRiver(Adafruit_Thermal &printer, uint8_t climate, char rvr){
         river = 3;
     }
 
-    printCurrentSample(printer, 0, rivers[(climate*2 + climate) + (river-1)][1]);
+    printCurrentSample(printer, rivers[(climate*2 + climate) + (river-1)][1], rivers[(climate*2 + climate) + (river-1)][2]);
 }
