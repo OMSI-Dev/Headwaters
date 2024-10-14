@@ -66,39 +66,51 @@ void loop() {
   }
 
   if(stream1Button.pressed()){
-    printStream(printer, climateCondition, 1);
+    //printStream(printer, climateCondition, 1);
+    printStreamSerial(climateCondition, 1);
   }
 
   if(stream2Button.pressed()){
-    printStream(printer, climateCondition, 2);
+    //printStream(printer, climateCondition, 2);
+    printStreamSerial(climateCondition, 2);
   }
 
   if(stream3Button.pressed()){
-    printStream(printer, climateCondition, 3);
+    //printStream(printer, climateCondition, 3);
+    printStreamSerial(climateCondition, 3);
   }
 
   if(river1Button.pressed()){
-    printRiver(printer, climateCondition, 'A');
+    Serial.println("In River A");
+    //printRiver(printer, climateCondition, 'A');
+    printRiverSerial(climateCondition, 'A');
   }
 
   if(river2Button.pressed()){
-    printRiver(printer, climateCondition, 'B');
+    Serial.println("In River B");
+    //printRiver(printer, climateCondition, 'B');
+    printRiverSerial(climateCondition, 'B');
   }
 
   if(river3Button.pressed()){
-    printRiver(printer, climateCondition, 'C');
+    Serial.println("In River C");
+    //printRiver(printer, climateCondition, 'C');
+    printRiverSerial(climateCondition, 'C');
   }
 
   if(precip1Button.pressed()){
-    printPrecipitation(printer, climateCondition, 1);
+    //printPrecipitation(printer, climateCondition, 1);
+    printPrecipitationSerial(climateCondition, 1);
   }
 
   if(precip2Button.pressed()){
-    printPrecipitation(printer, climateCondition, 2);
+    //printPrecipitation(printer, climateCondition, 2);
+    printPrecipitationSerial(climateCondition, 2);
   }
 
   if(precip3Button.pressed()){
-    printPrecipitation(printer, climateCondition, 3);
+    //printPrecipitation(printer, climateCondition, 3);
+    printPrecipitationSerial(climateCondition, 3);
   }
   // printQR(printer);
 }

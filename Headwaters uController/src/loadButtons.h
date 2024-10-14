@@ -8,8 +8,8 @@
 #define STREAM1_PIN 5
 #define STREAM2_PIN 1
 #define STREAM3_PIN 11
-#define RIVER1_PIN 4
-#define RIVER2_PIN 2
+#define RIVER1_PIN 2
+#define RIVER2_PIN 4
 #define RIVER3_PIN 6
 #define PRECIP1_PIN 9
 #define PRECIP2_PIN 10
@@ -35,7 +35,7 @@ bool setupButtons(){
   stream3Button.attach(STREAM3_PIN, INPUT_PULLUP);
   river1Button.attach(RIVER1_PIN, INPUT_PULLUP);
   river2Button.attach(RIVER2_PIN, INPUT_PULLUP);
-  river1Button.attach(RIVER3_PIN, INPUT_PULLUP);
+  river3Button.attach(RIVER3_PIN, INPUT_PULLUP);
   precip1Button.attach(PRECIP1_PIN, INPUT_PULLUP);
   precip2Button.attach(PRECIP2_PIN, INPUT_PULLUP);
   precip3Button.attach(PRECIP3_PIN, INPUT_PULLUP);

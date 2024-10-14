@@ -73,7 +73,7 @@ void printCurrentSample(Adafruit_Thermal &printer, uint16_t elv, uint8_t oxy){
 
     printer.print("Mean Watershed Elevation: ");
     printer.print(elv);
-    printer.print('M');
+    printer.print('m');
     printer.println();
  
     printer.println("Isotope Count: ");
@@ -184,7 +184,7 @@ void printRiver(Adafruit_Thermal &printer, uint8_t climate, char rvr){
 void printCurrentSampleSerial(uint16_t elv, uint8_t oxy){
     Serial.print("Mean Watershed Elevation: ");
     Serial.print(elv);
-    Serial.print('M');
+    Serial.print('m');
     Serial.println();
  
     Serial.println("Isotope Count: ");
@@ -215,7 +215,7 @@ void printPrecipitationSerial(uint8_t climate, uint8_t precip){
 }
 
 // Output to Serial a specific stream under current climate condition
-void printStreamSerial(Adafruit_Thermal &printer, uint8_t climate, uint8_t strm){
+void printStreamSerial(uint8_t climate, uint8_t strm){
     Serial.print("Stream Sample Site ");
     Serial.print(strm);
     Serial.println();
@@ -248,7 +248,7 @@ void printStreamSerial(Adafruit_Thermal &printer, uint8_t climate, uint8_t strm)
 }
 
 // Output to Serial a specific river under current climate condition
-void printRiver(uint8_t climate, char rvr){
+void printRiverSerial(uint8_t climate, char rvr){
     Serial.print("River Sample Site ");
     Serial.print(rvr);
     Serial.println();
