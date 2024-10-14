@@ -2,6 +2,7 @@
 #include <ledModes.h>
 #include <ledStreams.h>
 #include <loadButtons.h>
+#include <FastLED.h>
  
 // Setup printer to hardware serial
 // RX0 TX1
@@ -10,14 +11,25 @@ Adafruit_Thermal printer(&Serial2);
 //MoToTimer buttonLockoutTimer;
 //uint16_t btnLockTime = 250;
 
+// LED Pins and total number of LEDS in the strip
 #define NUM_LEDS_STRIP 14
 #define NUM_LEDS_RING 31
 #define LED_PIN1 15
 #define LED_PIN2 16
 
+// Define start of the LED section in the array
+#define stream2 2
+#define stream3 4
+#define river 6
+
 // Define the array of LEDs
-CRGB ledStrip[NUM_LEDS_STRIP];
+CRGBArray <NUM_LEDS_STRIP> ledStrip;
 CRGB ledRing[NUM_LEDS_RING];
+
+CRGB* stream1LED = &ledStrip[0];
+CRGB* stream2LED = &ledStrip[stream2];
+CRGB* stream3LED = &ledStrip[stream3];
+CRGB* riverLED = &ledStrip[river];
 
 // Climate condition modes
 // 0 = Normal
@@ -47,6 +59,15 @@ void setup() {
 
 void loop() {
   updateButtons();
+
+  ledStrip.fill_solid(CRGB::Red);
+  FastLED.show();
+
+  fill_solid(stream1LED, stream2-1, CRGB::Red);
+  fill_solid(stream2LED, stream3-1, CRGB::Blue);
+  fill_solid(stream3LED, river-1, CRGB::Green);
+  fill_solid(riverLED, NUM_LEDS_STRIP, CRGB::Red);
+  FastLED.show();
 
   if(modeButton.pressed()){
     if(climateCondition == 2){

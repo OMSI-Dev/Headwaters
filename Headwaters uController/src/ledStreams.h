@@ -5,6 +5,8 @@
 // Header file to keep the code that creates the streams
 // in the LED strips.
 
+
+
 void blueStream(CRGB *ledStrip, uint8_t NUM_LEDS_STRIP){
     // create a blue "stream" on the LED strip 
     for(int i = 0; i < NUM_LEDS_STRIP + 1; i++){
