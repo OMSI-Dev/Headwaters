@@ -177,3 +177,102 @@ void printRiver(Adafruit_Thermal &printer, uint8_t climate, char rvr){
 
     printCurrentSample(printer, rivers[(climate*2 + climate) + (river-1)][1], rivers[(climate*2 + climate) + (river-1)][2]);
 }
+
+// Functions for testing, print to Serial instead of Thermal Printer
+
+// Output to Serial sample with elevation and isotope levels
+void printCurrentSampleSerial(uint16_t elv, uint8_t oxy){
+    Serial.print("Mean Watershed Elevation: ");
+    Serial.print(elv);
+    Serial.print('M');
+    Serial.println();
+ 
+    Serial.println("Isotope Count: ");
+    Serial.print("O_18: ");
+    Serial.print(oxy);
+    Serial.println();
+}
+
+// Output to Serial a specific precipitation site under current climate condition
+void printPrecipitationSerial(uint8_t climate, uint8_t precip){
+    Serial.print("Precipitation Sample Site ");
+    Serial.print(precip);
+    Serial.println();
+
+    switch(climate){
+        case 0:
+            Serial.println("Climate Condition: Normal");
+            break;
+        case 1:
+            Serial.println("Climate Condition: High Snowpack");
+            break;
+        case 2:
+            Serial.println("Climate Condition: Drought");
+            break;
+    }
+
+    printCurrentSampleSerial(precipitations[(climate*2 + climate) + (precip-1)][1], precipitations[(climate*2 + climate) + (precip-1)][2]);
+}
+
+// Output to Serial a specific stream under current climate condition
+void printStreamSerial(Adafruit_Thermal &printer, uint8_t climate, uint8_t strm){
+    Serial.print("Stream Sample Site ");
+    Serial.print(strm);
+    Serial.println();
+
+    switch(climate){
+        case 0:
+            Serial.println("Climate Condition: Normal");
+            break;
+        case 1:
+            Serial.println("Climate Condition: High Snowpack");
+            break;
+        case 2:
+            Serial.println("Climate Condition: Drought");
+            break;
+    }
+
+    switch(strm){
+        case 1: 
+            Serial.println("Landscape: Lava Flows");
+            break;
+        case 2:
+            Serial.println("Landscape: Earthflows");
+            break;
+        case 3:
+            Serial.println("Landscape: Weathered Bedrock");
+            break;
+    }
+
+    printCurrentSampleSerial(streams[(climate*2 + climate) + (strm-1)][1], streams[(climate*2 + climate) + (strm-1)][2]);
+}
+
+// Output to Serial a specific river under current climate condition
+void printRiver(uint8_t climate, char rvr){
+    Serial.print("River Sample Site ");
+    Serial.print(rvr);
+    Serial.println();
+
+    switch(climate){
+        case 0:
+            Serial.println("Climate Condition: Normal");
+            break;
+        case 1:
+            Serial.println("Climate Condition: High Snowpack");
+            break;
+        case 2:
+            Serial.println("Climate Condition: Drought");
+            break;
+    }
+
+    uint8_t river = 0;
+    if(rvr == 'A'){
+        river = 1;
+    } else if (rvr == 'B'){
+        river = 2;
+    } else if(rvr == 'C'){
+        river = 3;
+    }
+
+    printCurrentSampleSerial(rivers[(climate*2 + climate) + (river-1)][1], rivers[(climate*2 + climate) + (river-1)][2]);
+}

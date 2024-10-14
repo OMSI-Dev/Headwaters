@@ -5,15 +5,15 @@
 // Defines and loads all ten buttons, plus the trigger
 
 #define MODE_PIN 0
-#define STREAM1_PIN 1
-#define STREAM2_PIN 2
-#define STREAM3_PIN 3
+#define STREAM1_PIN 5
+#define STREAM2_PIN 1
+#define STREAM3_PIN 11
 #define RIVER1_PIN 4
-#define RIVER2_PIN 5
+#define RIVER2_PIN 2
 #define RIVER3_PIN 6
 #define PRECIP1_PIN 9
 #define PRECIP2_PIN 10
-#define PRECIP3_PIN 11
+#define PRECIP3_PIN 3
 #define FACILITATOR_PIN 12
 
 Bounce2::Button modeButton = Bounce2::Button();
