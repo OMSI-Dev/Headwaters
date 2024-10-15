@@ -29,7 +29,7 @@ uint16_t streams[9][3] = {
 // Row 2 is River A, B, and C under snowpack conditions (1)
 // Row 3 is River A, B, and C under drought conditions (2)
 // {climate condition, mean watershed elevation, isotope oxygen_18 levels}
-uint8_t rivers[9][3] = {
+uint16_t rivers[9][3] = {
     {0, 1050, 2}, {0, 900, 3}, {0, 750, 5},
     {1, 1050, 1}, {1, 900, 3}, {1, 750, 4},
     {2, 1050, 3}, {2, 900, 5}, {2, 750, 8}

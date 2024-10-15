@@ -7,14 +7,14 @@
 
 // LED RING
 // LED Pin definitino and total number of LEDs in the ring
-#define LED_PIN2 16
+#define LED_RING_PIN 16
 #define NUM_LEDS_RING 31
 
 // Create the array of LEDs for the ring
 CRGB ledRing[NUM_LEDS_RING];
 
 // LED STRIP 
-#define LED_PIN1 15
+#define LED_STRIP_PIN 15
 // Declare number of pixels in each section, total of these will be
 // the total number of LEDs in the strip
 #define NUM_LEDS_STREAM1 2 // pixels 0-1
@@ -30,8 +30,8 @@ CRGB ledStrip[NUM_LEDS_STRIP];
 
 // Setups the LED strip and ring
 bool setupLED(){
-  FastLED.addLeds<NEOPIXEL, LED_PIN1>(ledStrip, NUM_LEDS_STRIP);
-  FastLED.addLeds<NEOPIXEL, LED_PIN2>(ledRing, NUM_LEDS_RING);
+  FastLED.addLeds<NEOPIXEL, LED_STRIP_PIN>(ledStrip, NUM_LEDS_STRIP);
+  FastLED.addLeds<NEOPIXEL, LED_RING_PIN>(ledRing, NUM_LEDS_RING);
   
   FastLED.setBrightness(255);
   FastLED.show();
