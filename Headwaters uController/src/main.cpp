@@ -2,7 +2,6 @@
 #include <ledModes.h>
 #include <ledStreams.h>
 #include <loadButtons.h>
-#include <FastLED.h>
  
 // Setup printer to hardware serial
 // RX0 TX1
@@ -11,26 +10,6 @@ Adafruit_Thermal printer(&Serial2);
 //MoToTimer buttonLockoutTimer;
 //uint16_t btnLockTime = 250;
 
-// LED Pins and total number of LEDS in the strip
-#define NUM_LEDS_STRIP 14
-#define NUM_LEDS_RING 31
-#define LED_PIN1 15
-#define LED_PIN2 16
-
-// Define start of the LED section in the array
-#define stream2 2
-#define stream3 4
-#define river 6
-
-// Define the array of LEDs
-CRGBArray <NUM_LEDS_STRIP> ledStrip;
-CRGB ledRing[NUM_LEDS_RING];
-
-CRGB* stream1LED = &ledStrip[0];
-CRGB* stream2LED = &ledStrip[stream2];
-CRGB* stream3LED = &ledStrip[stream3];
-CRGB* riverLED = &ledStrip[river];
-
 // Climate condition modes
 // 0 = Normal
 // 1 = High Snowpack
@@ -38,11 +17,9 @@ CRGB* riverLED = &ledStrip[river];
 uint8_t climateCondition = 2;
 
 void setup() {
-  FastLED.addLeds<NEOPIXEL, LED_PIN1>(ledStrip, NUM_LEDS_STRIP);
-  FastLED.addLeds<NEOPIXEL, LED_PIN2>(ledRing, NUM_LEDS_RING);
-
-  FastLED.setBrightness(255);
-  FastLED.show();
+  if(setupLED() == false){
+    Serial.println("Problem with setting up LED strip.");
+  }
 
   if(setupButtons() == false){
     Serial.println("Problem with setting up buttons.");
@@ -60,27 +37,21 @@ void setup() {
 void loop() {
   updateButtons();
 
-  ledStrip.fill_solid(CRGB::Red);
-  FastLED.show();
-
-  fill_solid(stream1LED, stream2-1, CRGB::Red);
-  fill_solid(stream2LED, stream3-1, CRGB::Blue);
-  fill_solid(stream3LED, river-1, CRGB::Green);
-  fill_solid(riverLED, NUM_LEDS_STRIP, CRGB::Red);
-  FastLED.show();
-
   if(modeButton.pressed()){
     if(climateCondition == 2){
       climateCondition = 0;
       Serial.println("Climate Condition: Normal");
+      normalConditionsLED();
       //pacifica_loop(ledRing);
     }else{
       climateCondition++;
       if(climateCondition == 1){
         Serial.println("Climate Conditions: High Snowpack");
+        snowConditionsLED();
         //snowpack(ledRing);
       } else if(climateCondition == 2){
         Serial.println("Climate Conditions: Dought");
+        droughtConditionsLED();
         //drought_loop(ledRing);
       }
     }
