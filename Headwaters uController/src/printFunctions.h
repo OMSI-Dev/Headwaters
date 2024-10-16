@@ -11,6 +11,29 @@
 // printer. Includes a test, WR codes, and 
 // print functions for the rivers, streams, and precipitations. 
 
+// Setup printer to hardware serial
+// RX0 TX1
+Adafruit_Thermal printer(&Serial2);
+
+// Set up Thermal Printer and check if it has paper.
+// Return false if there isn't paper in the printer.
+bool setupPrinter(){
+    printer.begin();
+
+    if(!printer.hasPaper()){
+        return false;
+    }
+    return true;
+}
+
+// Function to check if the printer has paper in main.cpp
+bool checkPrinterPaper(){
+    if(!printer.hasPaper()){
+        return false;
+    }
+    return true;
+}
+
 // Multidimensional arrays to hold the data for streams, rivers, and precipitations
 
 // Streams: 
@@ -46,7 +69,8 @@ uint16_t precipitations[9][3] = {
     {2, 400, 12}, {2, 800, 7}, {2, 1200, 4}
 };
 
-// Print different font and size options
+// Function to test the printer.
+// Prints different font and size options
 void printerTest(Adafruit_Thermal &printer){
   printer.setFont('A');
   printer.setSize('S');
@@ -67,7 +91,7 @@ void printerTest(Adafruit_Thermal &printer){
 }
 
 // Print sample with elevation and isotope levels
-void printCurrentSample(Adafruit_Thermal &printer, uint16_t elv, uint8_t oxy){
+void printCurrentSample(uint16_t elv, uint8_t oxy){
     printer.setFont('B');
     printer.setSize('S');
 
@@ -83,13 +107,13 @@ void printCurrentSample(Adafruit_Thermal &printer, uint16_t elv, uint8_t oxy){
 }
 
 // Print OMSI QR code
-void printQR(Adafruit_Thermal &printer){
+void printQR(){
   printer.printBitmap(QRWidth, QRHeight, OMSI_QR);
   printer.feed(4);
 }
 
 // Print a specific precipitation site under current climate condition
-void printPrecipitation(Adafruit_Thermal &printer, uint8_t climate, uint8_t precip){
+void printPrecipitation(uint8_t climate, uint8_t precip){
     printer.setFont('B');
     printer.setSize('S');
     printer.print("Precipitation Sample Site ");
@@ -108,11 +132,11 @@ void printPrecipitation(Adafruit_Thermal &printer, uint8_t climate, uint8_t prec
             break;
     }
 
-    printCurrentSample(printer, precipitations[(climate*2 + climate) + (precip-1)][1], precipitations[(climate*2 + climate) + (precip-1)][2]);
+    printCurrentSample(precipitations[(climate*2 + climate) + (precip-1)][1], precipitations[(climate*2 + climate) + (precip-1)][2]);
 }
 
 // Print a specific stream under current climate condition
-void printStream(Adafruit_Thermal &printer, uint8_t climate, uint8_t strm){
+void printStream(uint8_t climate, uint8_t strm){
     printer.setFont('B');
     printer.setSize('S');
     printer.print("Stream Sample Site ");
@@ -143,11 +167,11 @@ void printStream(Adafruit_Thermal &printer, uint8_t climate, uint8_t strm){
             break;
     }
 
-    printCurrentSample(printer, streams[(climate*2 + climate) + (strm-1)][1], streams[(climate*2 + climate) + (strm-1)][2]);
+    printCurrentSample(streams[(climate*2 + climate) + (strm-1)][1], streams[(climate*2 + climate) + (strm-1)][2]);
 }
 
 // Print a specific river under current climate condition
-void printRiver(Adafruit_Thermal &printer, uint8_t climate, char rvr){
+void printRiver(uint8_t climate, char rvr){
     printer.setFont('B');
     printer.setSize('S');
     printer.print("River Sample Site ");
@@ -175,7 +199,7 @@ void printRiver(Adafruit_Thermal &printer, uint8_t climate, char rvr){
         river = 3;
     }
 
-    printCurrentSample(printer, rivers[(climate*2 + climate) + (river-1)][1], rivers[(climate*2 + climate) + (river-1)][2]);
+    printCurrentSample(rivers[(climate*2 + climate) + (river-1)][1], rivers[(climate*2 + climate) + (river-1)][2]);
 }
 
 // Functions for testing, print to Serial instead of Thermal Printer

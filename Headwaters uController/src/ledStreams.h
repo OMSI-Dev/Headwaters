@@ -6,7 +6,7 @@
 // and the rivers in the LED strip and potential ring.
 
 // LED RING
-// LED Pin definitino and total number of LEDs in the ring
+// LED Pin definition and total number of LEDs in the ring
 #define LED_RING_PIN 16
 #define NUM_LEDS_RING 31
 
@@ -29,19 +29,16 @@ CRGB ledRing[NUM_LEDS_RING];
 CRGB ledStrip[NUM_LEDS_STRIP];
 
 // Setups the LED strip and ring
-bool setupLED(){
+void setupLED(){
   FastLED.addLeds<NEOPIXEL, LED_STRIP_PIN>(ledStrip, NUM_LEDS_STRIP);
   FastLED.addLeds<NEOPIXEL, LED_RING_PIN>(ledRing, NUM_LEDS_RING);
   
   FastLED.setBrightness(255);
   FastLED.show();
-
-  // if(ledStrip.size() == 0){
-  //   return false;
-  // }
-  return true;
 }
 
+// Break up the LED strip to set the required colors 
+// for each stream and river under normal climate conditions
 void normalConditionsLED(){
   // LEDs set for Stream 1
   for(uint8_t i = 0; i < NUM_LEDS_STREAM1; i++){
@@ -75,6 +72,8 @@ void normalConditionsLED(){
   FastLED.show();
 }
 
+// Break up the LED strip to set the required colors 
+// for each stream and river under high snowpack climate conditions
 void snowConditionsLED(){
    // LEDs set for Stream 1
   for(uint8_t i = 0; i < NUM_LEDS_STREAM1; i++){
@@ -108,6 +107,8 @@ void snowConditionsLED(){
   FastLED.show();
 }
 
+// Break up the LED strip to set the required colors 
+// for each stream and river under drought climate conditions
 void droughtConditionsLED(){
  // LEDs set for Stream 1
   for(uint8_t i = 0; i < NUM_LEDS_STREAM1; i++){
@@ -141,47 +142,50 @@ void droughtConditionsLED(){
   FastLED.show();
 }
 
+// Function to animate a blue stream flowing
 void blueStream(){
     // create a blue "stream" on the LED strip 
     for(int i = 0; i < NUM_LEDS_STRIP + 1; i++){
       fill_solid(ledStrip, i, CRGB::Blue);
       FastLED.show();
-      delay(80);
+      delay(40);
     }
 
     for(int i = 0; i < NUM_LEDS_STRIP + 1; i++){
       fill_solid(ledStrip, i, CRGB::Black);
       FastLED.show();
-      delay(80);
+      delay(40);
     }
 }
 
+// Function to animate a green stream flowing
 void greenStream(){
     // create a green "stream" on the LED strip 
     for(int i = 0; i < NUM_LEDS_STRIP + 1; i++){
       fill_solid(ledStrip, i, CRGB::Green);
       FastLED.show();
-      delay(80);
+      delay(40);
     }
 
     for(int i = 0; i < NUM_LEDS_STRIP + 1; i++){
       fill_solid(ledStrip, i, CRGB::Black);
       FastLED.show();
-      delay(80);
+      delay(40);
     }
 }
 
+// Function to animate a red stream flowing
 void redStream(){
     // create a red "stream" on the LED strip 
     for(int i = 0; i < NUM_LEDS_STRIP + 1; i++){
       fill_solid(ledStrip, i, CRGB::Red);
       FastLED.show();
-      delay(80);
+      delay(40);
     }
 
     for(int i = 0; i < NUM_LEDS_STRIP + 1; i++){
       fill_solid(ledStrip, i, CRGB::Black);
       FastLED.show();
-      delay(80);
+      delay(40);
     }
 }
