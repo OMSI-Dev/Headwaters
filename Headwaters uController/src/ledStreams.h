@@ -37,39 +37,59 @@ void setupLED(){
   FastLED.show();
 }
 
+void testLED(){
+  EVERY_N_MILLISECONDS( 200 ){
+    for(uint8_t i = 0; i < NUM_LEDS_STRIP; i++){
+      ledStrip[i] = CRGB::Red;
+      FastLED.show();
+    }
+  }
+  EVERY_N_MILLISECONDS( 200 ){
+    for(uint8_t i = 0; i < NUM_LEDS_STRIP; i++){
+      ledStrip[i] = CRGB::Black;
+      FastLED.show();
+    }
+  }
+}
+
 // Break up the LED strip to set the required colors 
 // for each stream and river under normal climate conditions
 void normalConditionsLED(){
   // LEDs set for Stream 1
   for(uint8_t i = 0; i < NUM_LEDS_STREAM1; i++){
     ledStrip[i] = CRGB::Blue;
+    FastLED.show();
   }
   
   // LEDs set for Stream 2
   for(uint8_t i = 0; i < NUM_LEDS_STREAM2; i++){
     ledStrip[NUM_LEDS_STREAM1 + i] = CRGB::Green;
+    FastLED.show();
   }
   
   // LEDs set for Stream 3
   for(uint8_t i = 0; i < NUM_LEDS_STREAM3; i++){
     ledStrip[NUM_LEDS_STREAM1 + NUM_LEDS_STREAM2 + i] = CRGB::Green;
+    FastLED.show();
   }
   
   // LEDS set for River A
   for(uint8_t i = 0; i < NUM_LEDS_RIVER1; i++){
     ledStrip[NUM_LEDS_STREAM1 + NUM_LEDS_STREAM2 + NUM_LEDS_STREAM3 + i] = CRGB::Blue;
+    FastLED.show();
   }
   
   // LEDS set for River B
   for(uint8_t i = 0; i < NUM_LEDS_RIVER2; i++){
     ledStrip[NUM_LEDS_STREAM1 + NUM_LEDS_STREAM2 + NUM_LEDS_STREAM3 + NUM_LEDS_RIVER1 + i] = CRGB::Blue;
+    FastLED.show();
   }
   
   // LEDS set for River C
   for(uint8_t i = 0; i < NUM_LEDS_RIVER3; i++){
     ledStrip[NUM_LEDS_STREAM1 + NUM_LEDS_STREAM2 + NUM_LEDS_STREAM3 + NUM_LEDS_RIVER1 + NUM_LEDS_RIVER2 + i] = CRGB::Green;
+    FastLED.show();
   }
-  FastLED.show();
 }
 
 // Break up the LED strip to set the required colors 
@@ -78,33 +98,38 @@ void snowConditionsLED(){
    // LEDs set for Stream 1
   for(uint8_t i = 0; i < NUM_LEDS_STREAM1; i++){
     ledStrip[i] = CRGB::Blue;
+    FastLED.show();
   }
   
   // LEDs set for Stream 2
   for(uint8_t i = 0; i < NUM_LEDS_STREAM2; i++){
     ledStrip[NUM_LEDS_STREAM1 + i] = CRGB::Blue;
+    FastLED.show();
   }
   
   // LEDs set for Stream 3
   for(uint8_t i = 0; i < NUM_LEDS_STREAM3; i++){
     ledStrip[NUM_LEDS_STREAM1 + NUM_LEDS_STREAM2 + i] = CRGB::Green;
+    FastLED.show();
   }
   
   // LEDS set for River A
   for(uint8_t i = 0; i < NUM_LEDS_RIVER1; i++){
     ledStrip[NUM_LEDS_STREAM1 + NUM_LEDS_STREAM2 + NUM_LEDS_STREAM3 + i] = CRGB::Blue;
+    FastLED.show();
   }
   
   // LEDS set for River B
   for(uint8_t i = 0; i < NUM_LEDS_RIVER2; i++){
     ledStrip[NUM_LEDS_STREAM1 + NUM_LEDS_STREAM2 + NUM_LEDS_STREAM3 + NUM_LEDS_RIVER1 + i] = CRGB::Blue;
+    FastLED.show();
   }
   
   // LEDS set for River C
   for(uint8_t i = 0; i < NUM_LEDS_RIVER3; i++){
     ledStrip[NUM_LEDS_STREAM1 + NUM_LEDS_STREAM2 + NUM_LEDS_STREAM3 + NUM_LEDS_RIVER1 + NUM_LEDS_RIVER2 + i] = CRGB::Blue;
+    FastLED.show();
   }
-  FastLED.show();
 }
 
 // Break up the LED strip to set the required colors 
@@ -113,33 +138,38 @@ void droughtConditionsLED(){
  // LEDs set for Stream 1
   for(uint8_t i = 0; i < NUM_LEDS_STREAM1; i++){
     ledStrip[i] = CRGB::Blue;
+    FastLED.show();
   }
   
   // LEDs set for Stream 2
   for(uint8_t i = 0; i < NUM_LEDS_STREAM2; i++){
     ledStrip[NUM_LEDS_STREAM1 + i] = CRGB::Red;
+    FastLED.show();
   }
   
   // LEDs set for Stream 3
   for(uint8_t i = 0; i < NUM_LEDS_STREAM3; i++){
     ledStrip[NUM_LEDS_STREAM1 + NUM_LEDS_STREAM2 + i] = CRGB::Red;
+    FastLED.show();
   }
   
   // LEDS set for River A
   for(uint8_t i = 0; i < NUM_LEDS_RIVER1; i++){
     ledStrip[NUM_LEDS_STREAM1 + NUM_LEDS_STREAM2 + NUM_LEDS_STREAM3 + i] = CRGB::Blue;
+    FastLED.show();
   }
   
   // LEDS set for River B
   for(uint8_t i = 0; i < NUM_LEDS_RIVER2; i++){
     ledStrip[NUM_LEDS_STREAM1 + NUM_LEDS_STREAM2 + NUM_LEDS_STREAM3 + NUM_LEDS_RIVER1 + i] = CRGB::Green;
+    FastLED.show();
   }
   
   // LEDS set for River C
   for(uint8_t i = 0; i < NUM_LEDS_RIVER3; i++){
     ledStrip[NUM_LEDS_STREAM1 + NUM_LEDS_STREAM2 + NUM_LEDS_STREAM3 + NUM_LEDS_RIVER1 + NUM_LEDS_RIVER2 + i] = CRGB::Red;
+    FastLED.show();
   }
-  FastLED.show();
 }
 
 // Function to animate a blue stream flowing
@@ -188,4 +218,26 @@ void redStream(){
       FastLED.show();
       delay(40);
     }
+}
+
+void streamAnimation(uint8_t climateCondition){
+  switch(climateCondition){
+    case 0:
+      EVERY_N_MILLISECONDS( 200 ){
+        for(uint8_t i = 0; i < NUM_LEDS_STRIP; i++){
+          for(uint8_t j = 0; j < NUM_LEDS_STRIP; j++){
+            ledStrip[i] = CRGB::Blue;
+          }
+          ledStrip[i] = CRGB::Black;
+        }
+      }
+      break;
+    case 1:
+      snowConditionsLED();
+      break;
+    case 2:
+      droughtConditionsLED();
+      break;
+  }
+
 }

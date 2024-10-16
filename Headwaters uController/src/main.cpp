@@ -10,7 +10,7 @@
 // 0 = Normal
 // 1 = High Snowpack
 // 2 = Drought
-uint8_t climateCondition = 2;
+uint8_t climateCondition = 3;
 
 void setup() {
 // Call custom function to handle the LED setup
@@ -43,6 +43,8 @@ void loop() {
 
 // Check if the printer has paper each loop.
 // If it doesn't, make all the rivers and streams red.
+// This will also be triggered if the printer
+// is not connected.
 // if(!checkPrinterPaper()){
 //   redStream();
 // }
@@ -50,24 +52,26 @@ void loop() {
 // Cycle through the climate conditions
 // Update LED colors based on the climate condition
   if(modeButton.pressed()){
-    if(climateCondition == 2){
+    if(climateCondition >= 2){
       climateCondition = 0;
       Serial.println("Climate Condition: Normal");
-      normalConditionsLED();
+      //normalConditionsLED();
       //pacifica_loop(ledRing);
     }else{
       climateCondition++;
       if(climateCondition == 1){
         Serial.println("Climate Conditions: High Snowpack");
-        snowConditionsLED();
+        //snowConditionsLED();
         //snowpack(ledRing);
       } else if(climateCondition == 2){
         Serial.println("Climate Conditions: Dought");
-        droughtConditionsLED();
+        //droughtConditionsLED();
         //drought_loop(ledRing);
       }
     }
   }
+
+  streamAnimation(climateCondition);
 
   if(stream1Button.pressed()){
     //printStream(climateCondition, 1);
