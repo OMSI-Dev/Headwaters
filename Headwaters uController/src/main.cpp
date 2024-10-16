@@ -43,9 +43,9 @@ void loop() {
 
 // Check if the printer has paper each loop.
 // If it doesn't, make all the rivers and streams red.
-if(!checkPrinterPaper){
-  redStream();
-}
+// if(!checkPrinterPaper()){
+//   redStream();
+// }
 
 // Cycle through the climate conditions
 // Update LED colors based on the climate condition
