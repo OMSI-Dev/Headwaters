@@ -71,7 +71,7 @@ uint16_t precipitations[9][3] = {
 
 // Function to test the printer.
 // Prints different font and size options
-void printerTest(Adafruit_Thermal &printer){
+void printerTest(){
   printer.setFont('A');
   printer.setSize('S');
   printer.println("This is font A in size S");
