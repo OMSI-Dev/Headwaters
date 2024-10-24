@@ -223,12 +223,14 @@ void redStream(){
 void streamAnimation(uint8_t climateCondition){
   switch(climateCondition){
     case 0:
-      EVERY_N_MILLISECONDS( 200 ){
-        for(uint8_t i = 0; i < NUM_LEDS_STRIP; i++){
+      for(uint8_t i = 0; i < NUM_LEDS_STRIP; i++){
+        EVERY_N_MILLISECONDS( 100 ){
           for(uint8_t j = 0; j < NUM_LEDS_STRIP; j++){
             ledStrip[i] = CRGB::Blue;
           }
-          ledStrip[i] = CRGB::Black;
+          EVERY_N_MILLISECONDS( 100 ){
+            ledStrip[i] = CRGB::Black;
+          }
         }
       }
       break;

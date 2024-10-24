@@ -41,6 +41,8 @@ void loop() {
 // Call function to update all buttons each loop
   updateButtons();
 
+  streamAnimation(climateCondition);
+
 // Check if the printer has paper each loop.
 // If it doesn't, make all the rivers and streams red.
 // This will also be triggered if the printer
