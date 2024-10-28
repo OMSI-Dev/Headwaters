@@ -5,24 +5,16 @@
 // Header file to keep the code that creates the streams
 // and the rivers in the LED strip and potential ring.
 
-// LED RING
-// LED Pin definition and total number of LEDs in the ring
-#define LED_RING_PIN 16
-#define NUM_LEDS_RING 31
-
-// Create the array of LEDs for the ring
-CRGB ledRing[NUM_LEDS_RING];
-
-// LED STRIP 
-#define LED_STRIP_PIN 15
+// LED strip
+#define LED_STRIP_PIN 23
 // Declare number of pixels in each section, total of these will be
 // the total number of LEDs in the strip
-#define NUM_LEDS_STREAM1 2 // pixels 0-1
-#define NUM_LEDS_STREAM2 4 // pixels 2-5
-#define NUM_LEDS_STREAM3 0 // pixels
-#define NUM_LEDS_RIVER1 6  // pixels 6-13
-#define NUM_LEDS_RIVER2 2  // pixels 14-15
-#define NUM_LEDS_RIVER3 0  // pixels 
+#define NUM_LEDS_STREAM1 22 // pixels 0-21
+#define NUM_LEDS_STREAM2 11 // pixels 108-119
+#define NUM_LEDS_STREAM3 11 // pixels 120-131
+#define NUM_LEDS_RIVER1 22  // pixels 0-21
+#define NUM_LEDS_RIVER2 31  // pixels 22-53
+#define NUM_LEDS_RIVER3 33  // pixels 54-88
 #define NUM_LEDS_STRIP (NUM_LEDS_STREAM1 + NUM_LEDS_STREAM2 + NUM_LEDS_STREAM3 + NUM_LEDS_RIVER1 + NUM_LEDS_RIVER2 + NUM_LEDS_RIVER3)
 
 // Create the array of LEDs for the strip
@@ -31,7 +23,6 @@ CRGB ledStrip[NUM_LEDS_STRIP];
 // Setups the LED strip and ring
 void setupLED(){
   FastLED.addLeds<NEOPIXEL, LED_STRIP_PIN>(ledStrip, NUM_LEDS_STRIP);
-  FastLED.addLeds<NEOPIXEL, LED_RING_PIN>(ledRing, NUM_LEDS_RING);
   
   FastLED.setBrightness(255);
   FastLED.show();

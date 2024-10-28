@@ -58,17 +58,14 @@ void loop() {
       climateCondition = 0;
       Serial.println("Climate Condition: Normal");
       //normalConditionsLED();
-      //pacifica_loop(ledRing);
     }else{
       climateCondition++;
       if(climateCondition == 1){
         Serial.println("Climate Conditions: High Snowpack");
         //snowConditionsLED();
-        //snowpack(ledRing);
       } else if(climateCondition == 2){
         Serial.println("Climate Conditions: Dought");
         //droughtConditionsLED();
-        //drought_loop(ledRing);
       }
     }
   }
