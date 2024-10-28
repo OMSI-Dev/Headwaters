@@ -8,7 +8,7 @@
 #define MODE_PIN 2
 #define STREAM1_PIN 4
 #define STREAM2_PIN 6
-#define STREAM3_PIN 18
+#define STREAM3_PIN 8
 #define RIVER1_PIN 10
 #define RIVER2_PIN 12
 #define RIVER3_PIN 16

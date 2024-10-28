@@ -2,9 +2,6 @@
 #include <Adafruit_Thermal.h>
 #include <cmath>
 #include <OMSI_QR.h>
-#include <testTube.h>
-#include <calicoTestTube.h>
-#include <deltaBMP.h>
 
 // Calico created September 25th, 2024
 // Store the print functions for the thermal
@@ -12,18 +9,13 @@
 // print functions for the rivers, streams, and precipitations. 
 
 // Setup printer to hardware serial
-// RX0 TX1
-Adafruit_Thermal printer(&Serial2);
+// RX1 TX1
+Adafruit_Thermal printer(&Serial1);
 
 // Set up Thermal Printer and check if it has paper.
 // Return false if there isn't paper in the printer.
-bool setupPrinter(){
+void setupPrinter(){
     printer.begin();
-
-    if(!printer.hasPaper()){
-        return false;
-    }
-    return true;
 }
 
 // Function to check if the printer has paper in main.cpp
@@ -142,6 +134,7 @@ void printStream(uint8_t climate, uint8_t strm){
     printer.print("Stream Sample Site ");
     printer.print(strm);
     printer.println();
+    Serial.println("In print stream");
 
     switch(climate){
         case 0:
