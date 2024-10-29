@@ -2,9 +2,9 @@
 #include <Bounce2.h>
 
 // Calico created October 3, 2024
-// Defines and loads all ten buttons, plus the trigger
+// Defines and loads all ten buttons, plus the trigger.
 
-// Define all pins (change where needed)
+// Define all pins (change where needed).
 #define MODE_PIN 2
 #define STREAM1_PIN 4
 #define STREAM2_PIN 6
@@ -17,7 +17,7 @@
 #define PRECIP3_PIN 21
 #define FACILITATOR_PIN 14
 
-// Create all button objects
+// Create all button objects.
 Bounce2::Button modeButton = Bounce2::Button();
 Bounce2::Button stream1Button = Bounce2::Button();
 Bounce2::Button stream2Button = Bounce2::Button();
@@ -31,7 +31,7 @@ Bounce2::Button precip3Button = Bounce2::Button();
 Bounce2::Button facilitatorButton = Bounce2::Button();
 
 bool setupButtons(){
-// Attach each button object to it's correct pin
+// Attach each button object to it's correct pin.
   modeButton.attach(MODE_PIN, INPUT_PULLUP);
   stream1Button.attach(STREAM1_PIN, INPUT_PULLUP);
   stream2Button.attach(STREAM2_PIN, INPUT_PULLUP);
@@ -44,7 +44,7 @@ bool setupButtons(){
   precip3Button.attach(PRECIP3_PIN, INPUT_PULLUP);
   facilitatorButton.attach(FACILITATOR_PIN, INPUT_PULLUP);
 
-// Debounce interval in milliseconds
+// Debounce interval in milliseconds.
   modeButton.interval(5);
   stream1Button.interval(5);
   stream2Button.interval(5);
@@ -57,7 +57,7 @@ bool setupButtons(){
   precip3Button.interval(5);
   facilitatorButton.interval(5);
 
-// Indicate that the low state corresponds to phsyically pressing the button
+// Indicate that the low state corresponds to phsyically pressing the button.
   modeButton.setPressedState(LOW); 
   stream1Button.setPressedState(LOW);
   stream2Button.setPressedState(LOW);
@@ -70,7 +70,7 @@ bool setupButtons(){
   precip3Button.setPressedState(LOW);
   facilitatorButton.setPressedState(LOW);
 
-// Check that pins got correctly attached
+// Check that pins got correctly attached.
   if(modeButton.getPin() == MODE_PIN &&
     stream1Button.getPin() == STREAM1_PIN &&
     stream2Button.getPin() == STREAM2_PIN &&
@@ -89,8 +89,7 @@ bool setupButtons(){
 }
 
 // Function to update the buttons.
-// Should be called at the beginning of
-// each loop.
+// Should be called at the beginning of each loop.
 void updateButtons(){
   modeButton.update();
   stream1Button.update();

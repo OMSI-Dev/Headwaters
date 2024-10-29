@@ -2,10 +2,14 @@
 #include <loadButtons.h>
 #include <printFunctions.h>
 
+// Main file for Headwaters.
+// Once everything is hooked up and turned on,
+// press the mode button once to begin the program. 
+
 //MoToTimer buttonLockoutTimer;
 //uint16_t btnLockTime = 250;
 
-// Climate condition modes
+// Climate condition modes:
 // 0 = Normal
 // 1 = High Snowpack
 // 2 = Drought
@@ -15,6 +19,7 @@ void setup() {
 // Call custom function to handle the LED setup
   setupLED();
 
+// Initialize LED on Teensy
   pinMode(13, OUTPUT);
 
 // Call custom function to handle the buttons setup
@@ -30,16 +35,15 @@ void setup() {
 // Call custom function to setup the Thermal Printer
   setupPrinter();
 
-  //ONLY USED FOR DEBUGGING OR TALKING TO A COMPUTER
-  //DELETE BEFORE FINAL
+// Keep commented out unless debugging or talking to a computer
   //while(!Serial);
-  Serial.println("Connected.");
 }
 
 void loop() {
 // Call function to update all buttons each loop
   updateButtons();
 
+// Blink LED on Teensy every second while running
   EVERY_N_SECONDS( 1 ){
     if(digitalRead(13) == HIGH){
       digitalWrite(13, LOW);
@@ -50,29 +54,29 @@ void loop() {
 
 // Check if the printer has paper each loop.
 // If it doesn't, make all the rivers and streams red.
-// This will also be triggered if the printer
-// is not connected.
+// This will also be triggered if the printer is not connected.
 // if(!checkPrinterPaper()){
 //   redStream();
 // }
 
-// Cycle through the climate conditions
-// Update LED colors based on the climate condition
+// Cycle through the climate conditions as mode button is pressed.
+// Update LED colors based on the climate condition.
   if(modeButton.pressed()){
     if(climateCondition >= 2){
       climateCondition = 0;
       Serial.println("Climate Condition: Normal");
+      //normalConditionsLED();
     }else{
       climateCondition++;
       if(climateCondition == 1){
         Serial.println("Climate Conditions: High Snowpack");
+        //snowConditionsLED();
       }else if(climateCondition == 2){
         Serial.println("Climate Conditions: Dought");
+        //droughtConditionsLED();
       }
     }
   }
-
-  //streamAnimation(climateCondition);
 
   if(stream1Button.pressed()){
     printStream(climateCondition, 1);

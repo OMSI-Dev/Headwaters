@@ -5,20 +5,18 @@
 
 // Calico created September 25th, 2024
 // Store the print functions for the thermal
-// printer. Includes a test, WR codes, and 
+// printer. Includes a test, QR codes, and 
 // print functions for the rivers, streams, and precipitations. 
 
-// Setup printer to hardware serial
-// RX1 TX1
+// Setup printer to hardware serial - RX1 TX1
 Adafruit_Thermal printer(&Serial1);
 
-// Set up Thermal Printer and check if it has paper.
-// Return false if there isn't paper in the printer.
+// Set up Thermal Printer.
 void setupPrinter(){
     printer.begin();
 }
 
-// Function to check if the printer has paper in main.cpp
+// Check if the printer has paper.
 bool checkPrinterPaper(){
     if(!printer.hasPaper()){
         return false;
@@ -29,9 +27,9 @@ bool checkPrinterPaper(){
 // Multidimensional arrays to hold the data for streams, rivers, and precipitations
 
 // Streams: 
-// Row 1 is Stream 1, 2, and 3 under normal conditions (0)
-// Row 2 is Stream 1, 2, and 3 under snowpack conditions (1)
-// Row 3 is Stream 1, 2, and 3 under drought conditions (2)
+// Row 1 is Stream 1, 2, and 3 under normal conditions (climate condiditon 0)
+// Row 2 is Stream 1, 2, and 3 under snowpack conditions (climate condition 1)
+// Row 3 is Stream 1, 2, and 3 under drought conditions (climate condition 2)
 // {climate condition, mean watershed elevation, isotope oxygen_18 levels}
 uint16_t streams[9][3] = {
     {0, 1200, 1}, {0, 950, 4}, {0, 700, 6},
@@ -40,9 +38,9 @@ uint16_t streams[9][3] = {
 };
 
 // Rivers: 
-// Row 1 is River A, B, and C under normal conditions (0)
-// Row 2 is River A, B, and C under snowpack conditions (1)
-// Row 3 is River A, B, and C under drought conditions (2)
+// Row 1 is River A, B, and C under normal conditions (climate condiditon 0)
+// Row 2 is River A, B, and C under snowpack conditions (climate condiditon 1)
+// Row 3 is River A, B, and C under drought conditions (climate condiditon 2)
 // {climate condition, mean watershed elevation, isotope oxygen_18 levels}
 uint16_t rivers[9][3] = {
     {0, 1050, 2}, {0, 900, 3}, {0, 750, 5},
@@ -51,9 +49,9 @@ uint16_t rivers[9][3] = {
 };
 
 // Precipitation: 
-// Row 1 is Precipitation 1, 2, and 3 under normal conditions (0)
-// Row 2 is Precipitation 1, 2, and 3 under snowpack conditions (1)
-// Row 3 is Precipitation 1, 2, and 3 under drought conditions (2)
+// Row 1 is Precipitation 1, 2, and 3 under normal conditions (climate condiditon 0)
+// Row 2 is Precipitation 1, 2, and 3 under snowpack conditions (climate condiditon 1)
+// Row 3 is Precipitation 1, 2, and 3 under drought conditions (climate condiditon 2)
 // {climate condition, mean watershed elevation, isotope oxygen_18 levels}
 uint16_t precipitations[9][3] = {
     {0, 400, 10}, {0, 800, 5}, {0, 1200, 2},
@@ -61,8 +59,7 @@ uint16_t precipitations[9][3] = {
     {2, 400, 12}, {2, 800, 7}, {2, 1200, 4}
 };
 
-// Function to test the printer.
-// Prints different font and size options
+// Function to test the printer. Prints different font and size options.
 void printerTest(){
   printer.setFont('A');
   printer.setSize('S');
@@ -82,7 +79,7 @@ void printerTest(){
   printer.feed(3);
 }
 
-// Print sample with elevation and isotope levels
+// Print sample with elevation and isotope levels.
 void printCurrentSample(uint16_t elv, uint8_t oxy){
     printer.setFont('B');
     printer.setSize('S');
@@ -98,13 +95,13 @@ void printCurrentSample(uint16_t elv, uint8_t oxy){
     printer.println();
 }
 
-// Print OMSI QR code
+// Print OMSI QR code.
 void printQR(){
   printer.printBitmap(QRWidth, QRHeight, OMSI_QR);
   printer.feed(4);
 }
 
-// Print a specific precipitation site under current climate condition
+// Print a specific precipitation site's data under current climate condition.
 void printPrecipitation(uint8_t climate, uint8_t precip){
     printer.setFont('B');
     printer.setSize('S');
@@ -127,7 +124,7 @@ void printPrecipitation(uint8_t climate, uint8_t precip){
     printCurrentSample(precipitations[(climate*2 + climate) + (precip-1)][1], precipitations[(climate*2 + climate) + (precip-1)][2]);
 }
 
-// Print a specific stream under current climate condition
+// Print a specific stream's data under current climate condition.
 void printStream(uint8_t climate, uint8_t strm){
     printer.setFont('B');
     printer.setSize('S');
@@ -163,7 +160,7 @@ void printStream(uint8_t climate, uint8_t strm){
     printCurrentSample(streams[(climate*2 + climate) + (strm-1)][1], streams[(climate*2 + climate) + (strm-1)][2]);
 }
 
-// Print a specific river under current climate condition
+// Print a specific river's data under current climate condition.
 void printRiver(uint8_t climate, char rvr){
     printer.setFont('B');
     printer.setSize('S');
@@ -195,9 +192,9 @@ void printRiver(uint8_t climate, char rvr){
     printCurrentSample(rivers[(climate*2 + climate) + (river-1)][1], rivers[(climate*2 + climate) + (river-1)][2]);
 }
 
-// Functions for testing, print to Serial instead of Thermal Printer
+// Functions for testing with a computer, print to Serial instead of Thermal Printer.
 
-// Output to Serial sample with elevation and isotope levels
+// Output to Serial sample with elevation and isotope levels.
 void printCurrentSampleSerial(uint16_t elv, uint8_t oxy){
     Serial.print("Mean Watershed Elevation: ");
     Serial.print(elv);
@@ -210,7 +207,7 @@ void printCurrentSampleSerial(uint16_t elv, uint8_t oxy){
     Serial.println();
 }
 
-// Output to Serial a specific precipitation site under current climate condition
+// Output to Serial a specific precipitation site's data under current climate condition.
 void printPrecipitationSerial(uint8_t climate, uint8_t precip){
     Serial.print("Precipitation Sample Site ");
     Serial.print(precip);
@@ -231,7 +228,7 @@ void printPrecipitationSerial(uint8_t climate, uint8_t precip){
     printCurrentSampleSerial(precipitations[(climate*2 + climate) + (precip-1)][1], precipitations[(climate*2 + climate) + (precip-1)][2]);
 }
 
-// Output to Serial a specific stream under current climate condition
+// Output to Serial a specific stream's data under current climate condition.
 void printStreamSerial(uint8_t climate, uint8_t strm){
     Serial.print("Stream Sample Site ");
     Serial.print(strm);
@@ -264,7 +261,7 @@ void printStreamSerial(uint8_t climate, uint8_t strm){
     printCurrentSampleSerial(streams[(climate*2 + climate) + (strm-1)][1], streams[(climate*2 + climate) + (strm-1)][2]);
 }
 
-// Output to Serial a specific river under current climate condition
+// Output to Serial a specific river's data under current climate condition.
 void printRiverSerial(uint8_t climate, char rvr){
     Serial.print("River Sample Site ");
     Serial.print(rvr);
