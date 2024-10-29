@@ -16,13 +16,13 @@ void setupPrinter(){
     printer.begin();
 }
 
-// Check if the printer has paper.
-bool checkPrinterPaper(){
-    if(!printer.hasPaper()){
-        return false;
-    }
-    return true;
-}
+// // Check if the printer has paper.
+// bool checkPrinterPaper(){
+//     if(!printer.hasPaper()){
+//         return false;
+//     }
+//     return true;
+// }
 
 // Multidimensional arrays to hold the data for streams, rivers, and precipitations
 
@@ -92,7 +92,7 @@ void printCurrentSample(uint16_t elv, uint8_t oxy){
     printer.println("Isotope Count: ");
     printer.print("O_18: ");
     printer.print(oxy);
-    printer.println();
+    printer.feed(4);
 }
 
 // Print OMSI QR code.
@@ -131,7 +131,6 @@ void printStream(uint8_t climate, uint8_t strm){
     printer.print("Stream Sample Site ");
     printer.print(strm);
     printer.println();
-    Serial.println("In print stream");
 
     switch(climate){
         case 0:

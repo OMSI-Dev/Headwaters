@@ -55,7 +55,9 @@ void loop() {
 // Check if the printer has paper each loop.
 // If it doesn't, make all the rivers and streams red.
 // This will also be triggered if the printer is not connected.
+// ****** Doesn't work? (function itself says it might not work on all printers)
 // if(!checkPrinterPaper()){
+//   Serial.println("Printer needs paper.");
 //   redStream();
 // }
 
@@ -65,15 +67,15 @@ void loop() {
     if(climateCondition >= 2){
       climateCondition = 0;
       Serial.println("Climate Condition: Normal");
-      //normalConditionsLED();
+      normalConditionsLED();
     }else{
       climateCondition++;
       if(climateCondition == 1){
         Serial.println("Climate Conditions: High Snowpack");
-        //snowConditionsLED();
+        snowConditionsLED();
       }else if(climateCondition == 2){
         Serial.println("Climate Conditions: Dought");
-        //droughtConditionsLED();
+        droughtConditionsLED();
       }
     }
   }

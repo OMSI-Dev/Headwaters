@@ -9,18 +9,18 @@
 #define LED_STRIP_PIN 23
 // Declare number of pixels in each section, total of these will be
 // the total number of LEDs in the strip.
-#define NUM_LEDS_STREAM_1 22 // pixels 0-21
-#define NUM_LEDS_STREAM_2 11 // pixels 108-119
-#define NUM_LEDS_STREAM_3 11 // pixels 120-131
+#define NUM_LEDS_STREAM_1 11 // pixels 115-125
+#define NUM_LEDS_STREAM_2 11 // pixels 104-114
+#define NUM_LEDS_STREAM_3 18 // pixels 86-103
 #define NUM_LEDS_RIVER_A 22  // pixels 0-21
-#define NUM_LEDS_RIVER_B 31  // pixels 22-53
-#define NUM_LEDS_RIVER_C 33  // pixels 54-88
+#define NUM_LEDS_RIVER_B 31  // pixels 22-52
+#define NUM_LEDS_RIVER_C 33  // pixels 53-85
 #define NUM_LEDS_TOTAL (NUM_LEDS_STREAM_1 + NUM_LEDS_STREAM_2 + NUM_LEDS_STREAM_3 + NUM_LEDS_RIVER_A + NUM_LEDS_RIVER_B + NUM_LEDS_RIVER_C)
 
 // Create the array of LEDs for the strip.
 CRGB ledStrip[NUM_LEDS_TOTAL];
 
-// Setups the LED strip and ring.
+// Setups the LED strip.
 void setupLED(){
   FastLED.addLeds<NEOPIXEL, LED_STRIP_PIN>(ledStrip, NUM_LEDS_TOTAL);
   
