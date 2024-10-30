@@ -17,6 +17,18 @@
 #define PRECIP3_PIN 21
 #define FACILITATOR_PIN 14
 
+// Define all pins for the LED rings on the buttons.
+#define MODE_LED 3
+#define STREAM_1_LED 5
+#define STREAM_2_LED 7
+#define STREAM_3_LED 9
+#define RIVER_A_LED 11
+#define RIVER_B_LED 13
+#define RIVER_C_LED 15
+#define PRECIP_1_LED 18
+#define PRECIP_2_LED 20
+#define PRECIP_3_LED 22
+
 // Create all button objects.
 Bounce2::Button modeButton = Bounce2::Button();
 Bounce2::Button stream1Button = Bounce2::Button();
@@ -70,6 +82,18 @@ bool setupButtons(){
   precip3Button.setPressedState(LOW);
   facilitatorButton.setPressedState(LOW);
 
+// Setting the digital pins for the LED rings on the buttons
+  pinMode(MODE_LED, OUTPUT);
+  pinMode(STREAM_1_LED, OUTPUT);
+  pinMode(STREAM_2_LED, OUTPUT);
+  pinMode(STREAM_3_LED, OUTPUT);
+  pinMode(RIVER_A_LED, OUTPUT);
+  pinMode(RIVER_B_LED, OUTPUT);
+  pinMode(RIVER_C_LED, OUTPUT);
+  pinMode(PRECIP_1_LED, OUTPUT);
+  pinMode(PRECIP_2_LED, OUTPUT);
+  pinMode(PRECIP_3_LED, OUTPUT);
+
 // Check that pins got correctly attached.
   if(modeButton.getPin() == MODE_PIN &&
     stream1Button.getPin() == STREAM1_PIN &&
@@ -102,4 +126,30 @@ void updateButtons(){
   precip2Button.update();
   precip3Button.update();
   facilitatorButton.update();
+}
+
+void turnOnButtonLEDs(){
+  digitalWrite(MODE_LED, HIGH);
+  digitalWrite(STREAM_1_LED, HIGH);
+  digitalWrite(STREAM_2_LED, HIGH);
+  digitalWrite(STREAM_3_LED, HIGH);
+  digitalWrite(RIVER_A_LED, HIGH);
+  digitalWrite(RIVER_B_LED, HIGH);
+  digitalWrite(RIVER_C_LED, HIGH);
+  digitalWrite(PRECIP_1_LED, HIGH);
+  digitalWrite(PRECIP_2_LED, HIGH);
+  digitalWrite(PRECIP_3_LED, HIGH);
+}
+
+void turnOffButtonLEDs(){
+  digitalWrite(MODE_LED, LOW);
+  digitalWrite(STREAM_1_LED, LOW);
+  digitalWrite(STREAM_2_LED, LOW);
+  digitalWrite(STREAM_3_LED, LOW);
+  digitalWrite(RIVER_A_LED, LOW);
+  digitalWrite(RIVER_B_LED, LOW);
+  digitalWrite(RIVER_C_LED, LOW);
+  digitalWrite(PRECIP_1_LED, LOW);
+  digitalWrite(PRECIP_2_LED, LOW);
+  digitalWrite(PRECIP_3_LED, LOW);
 }

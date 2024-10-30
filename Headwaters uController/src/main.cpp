@@ -64,6 +64,7 @@ void loop() {
 // Cycle through the climate conditions as mode button is pressed.
 // Update LED colors based on the climate condition.
   if(modeButton.pressed()){
+    turnOnButtonLEDs();
     if(climateCondition >= 2){
       climateCondition = 0;
       Serial.println("Climate Condition: Normal");
@@ -80,49 +81,69 @@ void loop() {
     }
   }
 
+// When a button is pressed, all the buttons' LEDs shut off until
+// the function to print is completed.
   if(stream1Button.pressed()){
+    turnOffButtonLEDs();
     printStream(climateCondition, 1);
     //printStreamSerial(climateCondition, 1);
+    turnOnButtonLEDs();
   }
 
   if(stream2Button.pressed()){
+    turnOffButtonLEDs();
     printStream(climateCondition, 2);
     //printStreamSerial(climateCondition, 2);
+    turnOnButtonLEDs();
   }
 
   if(stream3Button.pressed()){
+    turnOffButtonLEDs();
     printStream(climateCondition, 3);
     //printStreamSerial(climateCondition, 3);
+    turnOnButtonLEDs();
   }
 
   if(river1Button.pressed()){
+    turnOffButtonLEDs();
     printRiver(climateCondition, 'A');
     //printRiverSerial(climateCondition, 'A');
+    turnOnButtonLEDs();
   }
 
   if(river2Button.pressed()){
+    turnOffButtonLEDs();
     printRiver(climateCondition, 'B');
     //printRiverSerial(climateCondition, 'B');
+    turnOnButtonLEDs();
   }
 
   if(river3Button.pressed()){
+    turnOffButtonLEDs();
     printRiver(climateCondition, 'C');
     //printRiverSerial(climateCondition, 'C');
+    turnOnButtonLEDs();
   }
 
   if(precip1Button.pressed()){
+    turnOffButtonLEDs();
     printPrecipitation(climateCondition, 1);
     //printPrecipitationSerial(climateCondition, 1);
+    turnOnButtonLEDs();
   }
 
   if(precip2Button.pressed()){
+    turnOffButtonLEDs();
     printPrecipitation(climateCondition, 2);
     //printPrecipitationSerial(climateCondition, 2);
+    turnOnButtonLEDs();
   }
 
   if(precip3Button.pressed()){
+    turnOffButtonLEDs();
     printPrecipitation(climateCondition, 3);
     //printPrecipitationSerial(climateCondition, 3);
+    turnOnButtonLEDs();
   }
   //printQR(); 
 }
