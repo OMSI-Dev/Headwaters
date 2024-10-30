@@ -67,15 +67,15 @@ void loop() {
     if(climateCondition >= 2){
       climateCondition = 0;
       Serial.println("Climate Condition: Normal");
-      normalConditionsLED();
+      //normalConditionsLED();
     }else{
       climateCondition++;
       if(climateCondition == 1){
         Serial.println("Climate Conditions: High Snowpack");
-        snowConditionsLED();
+        //snowConditionsLED();
       }else if(climateCondition == 2){
         Serial.println("Climate Conditions: Dought");
-        droughtConditionsLED();
+        //droughtConditionsLED();
       }
     }
   }
@@ -124,5 +124,8 @@ void loop() {
     printPrecipitation(climateCondition, 3);
     //printPrecipitationSerial(climateCondition, 3);
   }
-  //printQR();
+
+  pacifica_loop();
+  //animatedLED(climateCondition);
+  //printQR(); 
 }
