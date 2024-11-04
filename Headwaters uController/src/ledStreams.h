@@ -69,7 +69,31 @@ void normalConditionsLED(){
 }
 
 // Break up the LED strip to set the required colors 
-// for each stream and river under high snowpack climate conditions
+// for each stream and river under normal climate conditions.
+// Recursively, with no for loop.
+void normalConditionsLEDRecursive(uint8_t i){
+  if(i == NUM_LEDS_TOTAL){
+    return;
+  }
+  if(i < (NUM_LEDS_RIVER_A + NUM_LEDS_RIVER_B)){
+    ledStrip[i] = CRGB::Blue;
+    FastLED.show();
+    normalConditionsLEDRecursive(i+1);
+  }
+  if((NUM_LEDS_RIVER_A + NUM_LEDS_RIVER_B) <= i && i < (NUM_LEDS_RIVER_A + NUM_LEDS_RIVER_B + NUM_LEDS_RIVER_C + NUM_LEDS_STREAM_3 + NUM_LEDS_STREAM_2)){
+    ledStrip[i] = CRGB::Green;
+    FastLED.show();
+    normalConditionsLEDRecursive(i+1);
+  }
+  if((NUM_LEDS_RIVER_A + NUM_LEDS_RIVER_B + NUM_LEDS_RIVER_C + NUM_LEDS_STREAM_3 + NUM_LEDS_STREAM_2) <= i && i < NUM_LEDS_TOTAL){
+    ledStrip[i] = CRGB::Blue;
+    FastLED.show();
+    normalConditionsLEDRecursive(i+1);
+  }
+}
+
+// Break up the LED strip to set the required colors 
+// for each stream and river under high snowpack climate conditions.
 void snowConditionsLED(){
   // River A
   for(uint8_t i = 0; i < NUM_LEDS_RIVER_A; i++){
@@ -105,6 +129,30 @@ void snowConditionsLED(){
   for(uint8_t i = 0; i < NUM_LEDS_STREAM_1; i++){
     ledStrip[NUM_LEDS_RIVER_A + NUM_LEDS_RIVER_B + NUM_LEDS_RIVER_C + NUM_LEDS_STREAM_3 + NUM_LEDS_STREAM_2 + i] = CRGB::Blue;
     FastLED.show();
+  }
+}
+
+// Break up the LED strip to set the required colors 
+// for each stream and river under high snowpack climate conditions.
+// Recursively, with no for loop.
+void snowConditionsLEDRecursive(uint8_t i){
+  if(i == NUM_LEDS_TOTAL){
+    return;
+  }
+  if(i < (NUM_LEDS_RIVER_A + NUM_LEDS_RIVER_B + NUM_LEDS_RIVER_C)){
+    ledStrip[i] = CRGB::Blue;
+    FastLED.show();
+    snowConditionsLEDRecursive(i+1);
+  }
+  if((NUM_LEDS_RIVER_A + NUM_LEDS_RIVER_B + NUM_LEDS_RIVER_C) <= i && i < (NUM_LEDS_RIVER_A + NUM_LEDS_RIVER_B + NUM_LEDS_RIVER_C + NUM_LEDS_STREAM_3)){
+    ledStrip[i] = CRGB::Green;
+    FastLED.show();
+    snowConditionsLEDRecursive(i+1);
+  }
+  if((NUM_LEDS_RIVER_A + NUM_LEDS_RIVER_B + NUM_LEDS_RIVER_C + NUM_LEDS_STREAM_3) <= i && i < NUM_LEDS_TOTAL){
+    ledStrip[i] = CRGB::Blue;
+    FastLED.show();
+    snowConditionsLEDRecursive(i+1);
   }
 }
 
@@ -146,6 +194,44 @@ void droughtConditionsLED(){
     ledStrip[NUM_LEDS_RIVER_A + NUM_LEDS_RIVER_B + NUM_LEDS_RIVER_C + NUM_LEDS_STREAM_3 + NUM_LEDS_STREAM_2 + i] = CRGB::Blue;
     FastLED.show();
   }
+}
+
+// Break up the LED strip to set the required colors 
+// for each stream and river under drought climate conditions.
+// Recursively, with no for loop.
+void droughtConditionsLEDRecursive(uint8_t i){
+  if(i == NUM_LEDS_TOTAL){
+    return;
+  }
+  if(i < NUM_LEDS_RIVER_A){
+    ledStrip[i] = CRGB::Blue;
+    FastLED.show();
+    droughtConditionsLEDRecursive(i+1);
+  }
+  if(NUM_LEDS_RIVER_A <= i && i < (NUM_LEDS_RIVER_A + NUM_LEDS_RIVER_B)){
+    ledStrip[i] = CRGB::Green;
+    FastLED.show();
+    droughtConditionsLEDRecursive(i+1);
+  }
+  if((NUM_LEDS_RIVER_A + NUM_LEDS_RIVER_B) <= i && i < (NUM_LEDS_RIVER_A + NUM_LEDS_RIVER_B + NUM_LEDS_RIVER_C + NUM_LEDS_STREAM_3 + NUM_LEDS_STREAM_2)){
+    ledStrip[i] = CRGB::Red;
+    FastLED.show();
+    droughtConditionsLEDRecursive(i+1);
+  }
+  if((NUM_LEDS_RIVER_A + NUM_LEDS_RIVER_B + NUM_LEDS_RIVER_C + NUM_LEDS_STREAM_3 + NUM_LEDS_STREAM_2) <= i && i < NUM_LEDS_TOTAL){
+    ledStrip[i] = CRGB::Blue;
+    FastLED.show();
+    droughtConditionsLEDRecursive(i+1);
+  }
+}
+
+// Recursive function to turn all the LEDs black.
+void ledBlackout(uint8_t i){
+  if(i == NUM_LEDS_TOTAL){
+    return;
+  }
+  ledStrip[i] = CRGB::Black;
+  ledBlackout(i+1);
 }
 
 // Animate a blue stream flowing.

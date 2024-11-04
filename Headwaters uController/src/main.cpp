@@ -42,6 +42,7 @@ void setup() {
 void loop() {
 // Call function to update all buttons each loop
   updateButtons();
+  turnOnButtonLEDs();
 
 // Blink LED on Teensy every second while running
   EVERY_N_SECONDS( 1 ){
@@ -64,19 +65,18 @@ void loop() {
 // Cycle through the climate conditions as mode button is pressed.
 // Update LED colors based on the climate condition.
   if(modeButton.pressed()){
-    turnOnButtonLEDs();
     if(climateCondition >= 2){
       climateCondition = 0;
       Serial.println("Climate Condition: Normal");
-      normalConditionsLED();
+      normalConditionsLEDRecursive(0);
     }else{
       climateCondition++;
       if(climateCondition == 1){
         Serial.println("Climate Conditions: High Snowpack");
-        snowConditionsLED();
+        snowConditionsLEDRecursive(0);
       }else if(climateCondition == 2){
         Serial.println("Climate Conditions: Dought");
-        droughtConditionsLED();
+        droughtConditionsLEDRecursive(0);
       }
     }
   }
