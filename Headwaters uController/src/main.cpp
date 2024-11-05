@@ -1,13 +1,14 @@
-#include <ledStreams.h>
+#include <loadLEDs.h>
 #include <loadButtons.h>
 #include <printFunctions.h>
+#include <Timer.h>
 
 // Main file for Headwaters.
 // Once everything is hooked up and turned on,
 // press the mode button once to begin the program. 
 
-//MoToTimer buttonLockoutTimer;
-//uint16_t btnLockTime = 250;
+MoToTimer timer;
+uint16_t timeValue = 1000;
 
 // Climate condition modes:
 // 0 = Normal
@@ -18,9 +19,6 @@ uint8_t climateCondition = 3;
 void setup() {
 // Call custom function to handle the LED setup
   setupLED();
-
-// Initialize LED on Teensy
-  pinMode(13, OUTPUT);
 
 // Call custom function to handle the buttons setup
 // with error check
@@ -44,14 +42,33 @@ void loop() {
   updateButtons();
   turnOnButtonLEDs();
 
-// Blink LED on Teensy every second while running
-  EVERY_N_SECONDS( 1 ){
-    if(digitalRead(13) == HIGH){
-      digitalWrite(13, LOW);
-    }else{
-      digitalWrite(13, HIGH);
+  if(!timer.expired()){
+    switch(climateCondition){
+      case 0:
+        normalConditionsLEDRecursive(0);
+        break;
+      case 1:
+        snowConditionsLEDRecursive(0);
+        break;
+      case 2:
+        droughtConditionsLEDRecursive(0);
+        break;
     }
+  }else{
+    ledBlackout(0);
+    timer.restart();
   }
+
+// Commented out because in order to light up the LEDs on
+// the buttons, this pin has to alwasy be turned on.
+// // Blink LED on Teensy every second while running
+//   EVERY_N_SECONDS( 1 ){
+//     if(digitalRead(13) == HIGH){
+//       digitalWrite(13, LOW);
+//     }else{
+//       digitalWrite(13, HIGH);
+//     }
+//   }
 
 // Check if the printer has paper each loop.
 // If it doesn't, make all the rivers and streams red.
@@ -79,6 +96,8 @@ void loop() {
         droughtConditionsLEDRecursive(0);
       }
     }
+    timer.setTime(timeValue);
+    timer.restart();
   }
 
 // When a button is pressed, all the buttons' LEDs shut off until

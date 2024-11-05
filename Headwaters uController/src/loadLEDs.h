@@ -72,7 +72,7 @@ void normalConditionsLED(){
 // for each stream and river under normal climate conditions.
 // Recursively, with no for loop.
 void normalConditionsLEDRecursive(uint8_t i){
-  if(i == NUM_LEDS_TOTAL){
+  if(i >= NUM_LEDS_TOTAL){
     return;
   }
   if(i < (NUM_LEDS_RIVER_A + NUM_LEDS_RIVER_B)){
@@ -136,7 +136,7 @@ void snowConditionsLED(){
 // for each stream and river under high snowpack climate conditions.
 // Recursively, with no for loop.
 void snowConditionsLEDRecursive(uint8_t i){
-  if(i == NUM_LEDS_TOTAL){
+  if(i >= NUM_LEDS_TOTAL){
     return;
   }
   if(i < (NUM_LEDS_RIVER_A + NUM_LEDS_RIVER_B + NUM_LEDS_RIVER_C)){
@@ -200,7 +200,7 @@ void droughtConditionsLED(){
 // for each stream and river under drought climate conditions.
 // Recursively, with no for loop.
 void droughtConditionsLEDRecursive(uint8_t i){
-  if(i == NUM_LEDS_TOTAL){
+  if(i >= NUM_LEDS_TOTAL){
     return;
   }
   if(i < NUM_LEDS_RIVER_A){
