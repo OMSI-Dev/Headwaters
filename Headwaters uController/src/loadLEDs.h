@@ -34,14 +34,58 @@ CRGB* stream1_array = &ledStrip[NUM_LEDS_RIVER_A + NUM_LEDS_RIVER_B + NUM_LEDS_R
 void setupLED(){
   FastLED.addLeds<NEOPIXEL, LED_STRIP_PIN>(ledStrip, NUM_LEDS_TOTAL);
   
-  FastLED.setBrightness(255);
+  //FastLED.setBrightness(50);
+  FastLED.setMaxPowerInVoltsAndMilliamps(5, 500);
   fill_solid(ledStrip, NUM_LEDS_TOTAL, CRGB::Black);
   FastLED.show();
+}
+
+// Create a stream effect without a for loop, recursing
+// in the main loop, with the correct colors for
+// normal climate conditions.
+uint8_t normalConditionsRecurse(uint8_t ledPixel, uint8_t sinBeat){
+  if(ledPixel >= NUM_LEDS_TOTAL){
+    return 0;
+  }
+  // Set Rivers A & B
+  if(ledPixel < NUM_LEDS_RIVER_A + NUM_LEDS_RIVER_B){
+    ledStrip[ledPixel] = CHSV(160, 255, sinBeat);
+    FastLED.show();
+    return (ledPixel + 1);
+  }
+  // Set River C
+  if(ledPixel >= NUM_LEDS_RIVER_A + NUM_LEDS_RIVER_B && ledPixel < NUM_LEDS_RIVER_A + NUM_LEDS_RIVER_B + NUM_LEDS_RIVER_C){
+    ledStrip[ledPixel] = CHSV(160, 255, sinBeat);
+    FastLED.show();
+    return (ledPixel + 1);
+  }
+  // Set Stream 3 & 2
+  if(ledPixel >= NUM_LEDS_RIVER_A + NUM_LEDS_RIVER_B + NUM_LEDS_RIVER_C && ledPixel < NUM_LEDS_RIVER_A + NUM_LEDS_RIVER_B + NUM_LEDS_RIVER_C + NUM_LEDS_STREAM_3 + NUM_LEDS_STREAM_2){
+    ledStrip[ledPixel] = CHSV(96, 255, sinBeat);
+    FastLED.show();
+    return (ledPixel + 1);
+  }
+  // Set Stream 1
+  if(ledPixel >= NUM_LEDS_RIVER_A + NUM_LEDS_RIVER_B + NUM_LEDS_RIVER_C + NUM_LEDS_STREAM_3 + NUM_LEDS_STREAM_2 && ledPixel < NUM_LEDS_TOTAL){
+    ledStrip[ledPixel] = CHSV(160, 255, sinBeat);
+    FastLED.show();
+    return (ledPixel + 1);
+  }
+  return 0;
 }
 
 // Fill the stream and river LEDs with the colors
 // for normal climate conditions.
 void normalConditions(){
+
+  // // Saturation values: Blue 160, Green 96, Red 0
+  // riverA_array[NUM_LEDS_RIVER_A] = CHSV(160, sinBeat, 255);
+  // stream1_array[NUM_LEDS_STREAM_1] = CHSV(160, sinBeat, 255);
+  // riverB_array[NUM_LEDS_RIVER_B] = CHSV(160, sinBeat, 255);
+  // stream2_array[NUM_LEDS_STREAM_2] = CHSV(96, sinBeat, 255);
+  // riverC_array[NUM_LEDS_RIVER_C] = CHSV(96, sinBeat, 255);
+  // stream3_array[NUM_LEDS_STREAM_3] = CHSV(96, sinBeat, 255);
+  
   fill_solid(stream1_array, NUM_LEDS_STREAM_1, CRGB::Blue);
   fill_solid(stream2_array, NUM_LEDS_STREAM_2, CRGB::Green);
   fill_solid(stream3_array, NUM_LEDS_STREAM_3, CRGB::Green);
@@ -51,9 +95,46 @@ void normalConditions(){
   FastLED.show();
 }
 
+// Create a stream effect without a for loop, recursing
+// in the main loop, with the correct colors for
+// high snowpack climate conditions.
+uint8_t snowConditionsRecurse(uint8_t ledPixel, uint8_t sinBeat){
+  if(ledPixel >= NUM_LEDS_TOTAL){
+    return 0;
+  }
+  // Set Rivers A & B & C
+  if(ledPixel < NUM_LEDS_RIVER_A + NUM_LEDS_RIVER_B + NUM_LEDS_RIVER_C){
+    ledStrip[ledPixel] = CHSV(160, 255, sinBeat);
+    FastLED.show();
+    return (ledPixel + 1);
+  }
+  // Set Stream 3
+  if(ledPixel >= NUM_LEDS_RIVER_A + NUM_LEDS_RIVER_B + NUM_LEDS_RIVER_C && ledPixel < NUM_LEDS_RIVER_A + NUM_LEDS_RIVER_B + NUM_LEDS_RIVER_C + NUM_LEDS_STREAM_3){
+    ledStrip[ledPixel] = CHSV(96, 255, sinBeat);
+    FastLED.show();
+    return (ledPixel + 1);
+  }
+  // Set Streams 2 & 1
+  if(ledPixel >= NUM_LEDS_RIVER_A + NUM_LEDS_RIVER_B + NUM_LEDS_RIVER_C + NUM_LEDS_STREAM_3 && ledPixel < NUM_LEDS_TOTAL){
+    ledStrip[ledPixel] = CHSV(160, 255, sinBeat);
+    FastLED.show();
+    return (ledPixel + 1);
+  }
+  return 0;
+}
+
 // Fill the stream and river LEDs with the colors
 // for high snowpack climate conditions.
 void snowConditions(){
+  
+  // // Saturation values: Blue 160, Green 96, Red 0
+  // riverA_array[NUM_LEDS_RIVER_A] = CHSV(0, 160, sinBeat);
+  // stream1_array[NUM_LEDS_STREAM_1] = CHSV(0, 160, sinBeat);
+  // riverB_array[NUM_LEDS_RIVER_B] = CHSV(0, 160, sinBeat);
+  // stream2_array[NUM_LEDS_STREAM_2] = CHSV(0, 160, sinBeat);
+  // riverC_array[NUM_LEDS_RIVER_C] = CHSV(0, 160, sinBeat);
+  // stream3_array[NUM_LEDS_STREAM_3] = CHSV(0, 96, sinBeat);
+
   fill_solid(stream1_array, NUM_LEDS_STREAM_1, CRGB::Blue);
   fill_solid(stream2_array, NUM_LEDS_STREAM_2, CRGB::Blue);
   fill_solid(stream3_array, NUM_LEDS_STREAM_3, CRGB::Green);
@@ -63,15 +144,61 @@ void snowConditions(){
   FastLED.show();
 }
 
+// Create a stream effect without a for loop, recursing
+// in the main loop, with the correct colors for
+// drought climate conditions.
+uint8_t droughtConditionsRecurse(uint8_t ledPixel, uint8_t sinBeat){
+  if(ledPixel >= NUM_LEDS_TOTAL){
+    return 0;
+  }
+  // Set River A
+  if(ledPixel < NUM_LEDS_RIVER_A){
+    ledStrip[ledPixel] = CHSV(160, 255, sinBeat);
+    FastLED.show();
+    return (ledPixel + 1);
+  }
+  // Set River B
+  if(ledPixel >= NUM_LEDS_RIVER_A && ledPixel < NUM_LEDS_RIVER_A + NUM_LEDS_RIVER_B){
+    ledStrip[ledPixel] = CHSV(96, 255, sinBeat);
+    FastLED.show();
+    return (ledPixel + 1);
+  }
+  // Set River C & Stream 3 & 2
+  if(ledPixel >= NUM_LEDS_RIVER_A + NUM_LEDS_RIVER_B && ledPixel < NUM_LEDS_RIVER_A + NUM_LEDS_RIVER_B + NUM_LEDS_RIVER_C + NUM_LEDS_STREAM_3 + NUM_LEDS_STREAM_2){
+    ledStrip[ledPixel] = CHSV(0, 255, sinBeat);
+    FastLED.show();
+    return (ledPixel + 1);
+  }
+  // Set Stream 1
+  if(ledPixel >= NUM_LEDS_RIVER_A + NUM_LEDS_RIVER_B + NUM_LEDS_RIVER_C + NUM_LEDS_STREAM_3 + NUM_LEDS_STREAM_2 && ledPixel < NUM_LEDS_TOTAL){
+    ledStrip[ledPixel] = CHSV(160, 255, sinBeat);
+    FastLED.show();
+    return (ledPixel + 1);
+  }
+  return 0;
+}
+
 // Fill the stream and river LEDs with the colors
 // for drought climate conditions.
 void droughtConditions(){
+
+  // // Saturation values: Blue 160, Green 96, Red 0
+  // riverA_array[NUM_LEDS_RIVER_A] = CHSV(0, 160, sinBeat);
+  // stream1_array[NUM_LEDS_STREAM_1] = CHSV(0, 160, sinBeat);
+  // riverB_array[NUM_LEDS_RIVER_B] = CHSV(0, 96, sinBeat);
+  // stream2_array[NUM_LEDS_STREAM_2] = CHSV(0, 0, sinBeat);
+  // riverC_array[NUM_LEDS_RIVER_C] = CHSV(0, 0, sinBeat);
+  // stream3_array[NUM_LEDS_STREAM_3] = CHSV(0, 0, sinBeat);
+
   fill_solid(stream1_array, NUM_LEDS_STREAM_1, CRGB::Blue);
   fill_solid(stream2_array, NUM_LEDS_STREAM_2, CRGB::Red);
   fill_solid(stream3_array, NUM_LEDS_STREAM_3, CRGB::Red);
   fill_solid(riverA_array, NUM_LEDS_RIVER_A, CRGB::Blue);
   fill_solid(riverB_array, NUM_LEDS_RIVER_B, CRGB::Green);
   fill_solid(riverC_array, NUM_LEDS_RIVER_C, CRGB::Red);
+  // nscale8_video(stream3_array, NUM_LEDS_STREAM_3, 30);
+  // nscale8_video(stream2_array, NUM_LEDS_STREAM_2, 30);
+  // nscale8_video(stream1_array, NUM_LEDS_STREAM_1, 30);
   FastLED.show();
 }
 

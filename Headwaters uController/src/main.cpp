@@ -16,6 +16,8 @@ uint16_t timeValue = 1000;
 // 2 = Drought
 uint8_t climateCondition = 3;
 
+uint8_t pixelLoc = 0;
+
 void setup() {
 // Call custom function to handle the buttons setup
 // with error check
@@ -32,6 +34,7 @@ void setup() {
 
 // Keep commented out unless debugging or talking to a computer
   //while(!Serial);
+
   // Call custom function to handle the LED setup
   setupLED();
 }
@@ -40,23 +43,20 @@ void loop() {
 // Call function to update all buttons each loop
   updateButtons();
   turnOnButtonLEDs();
-
-  // if(!timer.expired()){
-  //   switch(climateCondition){
-  //     case 0:
-  //       normalConditionsLEDRecursive(0);
-  //       break;
-  //     case 1:
-  //       snowConditionsLEDRecursive(0);
-  //       break;
-  //     case 2:
-  //       droughtConditionsLEDRecursive(0);
-  //       break;
-  //   }
-  // }else{
-  //   ledBlackout(0);
-  //   timer.restart();
-  // }
+  
+  // Creating the sin wave to adjust the brightness to a wave-like effect.
+  // "Recursing" through the whole LED strip.
+  switch(climateCondition){
+    case 0:
+      pixelLoc = normalConditionsRecurse(pixelLoc, (beatsin8(35, 100, 200, 0, 0)));
+      break;
+    case 1:
+      pixelLoc = snowConditionsRecurse(pixelLoc, (beatsin8(60, 150, 255, 0, 0)));
+      break;
+    case 2:
+      pixelLoc = droughtConditionsRecurse(pixelLoc, (beatsin8(20, 50, 115, 0, 0)));
+      break;
+  }
 
 // Commented out because in order to light up the LEDs on
 // the buttons, this pin has to alwasy be turned on.
@@ -85,15 +85,15 @@ void loop() {
       climateCondition = 0;
       Serial.println("Climate Condition: Normal");
       //testLEDs();
-      normalConditions();
+      //normalConditions();
     }else{
       climateCondition++;
       if(climateCondition == 1){
         Serial.println("Climate Conditions: High Snowpack");
-        snowConditions();
+        //snowConditions();
       }else if(climateCondition == 2){
         Serial.println("Climate Conditions: Dought");
-        droughtConditions();
+        //droughtConditions();
       }
     }
     // timer.setTime(timeValue);
