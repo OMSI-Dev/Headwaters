@@ -4,6 +4,10 @@
 // Calico created October 3, 2024
 // Defines and loads all ten buttons, plus the trigger.
 
+uint8_t howLongToWait = 250;
+uint16_t lastTimeItHappened = 0;
+uint8_t howLongItsBeen;
+
 // Define all pins (change where needed).
 #define MODE_PIN 2
 #define STREAM1_PIN 4
@@ -152,4 +156,12 @@ void turnOffButtonLEDs(){
   digitalWrite(PRECIP_1_LED, LOW);
   digitalWrite(PRECIP_2_LED, LOW);
   digitalWrite(PRECIP_3_LED, LOW);
+}
+
+void fadeButtons(){
+  howLongItsBeen = millis() - lastTimeItHappened;
+  if( howLongItsBeen >= howLongToWait){
+    // Fade buttons
+    lastTimeItHappened = millis();
+  }
 }

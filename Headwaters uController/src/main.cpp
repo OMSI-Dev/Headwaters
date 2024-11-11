@@ -17,9 +17,6 @@ uint16_t timeValue = 1000;
 uint8_t climateCondition = 3;
 
 void setup() {
-// Call custom function to handle the LED setup
-  setupLED();
-
 // Call custom function to handle the buttons setup
 // with error check
   if(!setupButtons()){
@@ -35,6 +32,8 @@ void setup() {
 
 // Keep commented out unless debugging or talking to a computer
   //while(!Serial);
+  // Call custom function to handle the LED setup
+  setupLED();
 }
 
 void loop() {
@@ -42,22 +41,22 @@ void loop() {
   updateButtons();
   turnOnButtonLEDs();
 
-  if(!timer.expired()){
-    switch(climateCondition){
-      case 0:
-        normalConditionsLEDRecursive(0);
-        break;
-      case 1:
-        snowConditionsLEDRecursive(0);
-        break;
-      case 2:
-        droughtConditionsLEDRecursive(0);
-        break;
-    }
-  }else{
-    ledBlackout(0);
-    timer.restart();
-  }
+  // if(!timer.expired()){
+  //   switch(climateCondition){
+  //     case 0:
+  //       normalConditionsLEDRecursive(0);
+  //       break;
+  //     case 1:
+  //       snowConditionsLEDRecursive(0);
+  //       break;
+  //     case 2:
+  //       droughtConditionsLEDRecursive(0);
+  //       break;
+  //   }
+  // }else{
+  //   ledBlackout(0);
+  //   timer.restart();
+  // }
 
 // Commented out because in order to light up the LEDs on
 // the buttons, this pin has to alwasy be turned on.
@@ -85,19 +84,20 @@ void loop() {
     if(climateCondition >= 2){
       climateCondition = 0;
       Serial.println("Climate Condition: Normal");
-      normalConditionsLEDRecursive(0);
+      //testLEDs();
+      normalConditions();
     }else{
       climateCondition++;
       if(climateCondition == 1){
         Serial.println("Climate Conditions: High Snowpack");
-        snowConditionsLEDRecursive(0);
+        snowConditions();
       }else if(climateCondition == 2){
         Serial.println("Climate Conditions: Dought");
-        droughtConditionsLEDRecursive(0);
+        droughtConditions();
       }
     }
-    timer.setTime(timeValue);
-    timer.restart();
+    // timer.setTime(timeValue);
+    // timer.restart();
   }
 
 // When a button is pressed, all the buttons' LEDs shut off until
