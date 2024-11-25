@@ -61,14 +61,29 @@ uint8_t normalConditionsRecurse(uint8_t ledPixel, uint8_t sinBeat){
   }
   // Set Stream 3 & 2
   if(ledPixel >= NUM_LEDS_RIVER_A + NUM_LEDS_RIVER_B + NUM_LEDS_RIVER_C && ledPixel < NUM_LEDS_RIVER_A + NUM_LEDS_RIVER_B + NUM_LEDS_RIVER_C + NUM_LEDS_STREAM_3 + NUM_LEDS_STREAM_2){
-    ledStrip[ledPixel] = CHSV(96, 255, sinBeat);
-    FastLED.show();
+    if(ledPixel == 86 ||
+        ledPixel == 87 ||
+        ledPixel == 88 ||
+        ledPixel == 89 ||
+        ledPixel == 104 ||
+        ledPixel == 105){
+      ledStrip[ledPixel] = CRGB::Black;
+      FastLED.show();
+    } else {
+      ledStrip[ledPixel] = CHSV(96, 255, sinBeat);
+      FastLED.show();
+    }
     return (ledPixel + 1);
   }
   // Set Stream 1
   if(ledPixel >= NUM_LEDS_RIVER_A + NUM_LEDS_RIVER_B + NUM_LEDS_RIVER_C + NUM_LEDS_STREAM_3 + NUM_LEDS_STREAM_2 && ledPixel < NUM_LEDS_TOTAL){
-    ledStrip[ledPixel] = CHSV(160, 255, sinBeat);
-    FastLED.show();
+    if(ledPixel == 115 || ledPixel == 116){
+      ledStrip[ledPixel] = CRGB::Black;
+      FastLED.show();
+    } else {
+      ledStrip[ledPixel] = CHSV(160, 255, sinBeat);
+      FastLED.show();
+    }
     return (ledPixel + 1);
   }
   return 0;
@@ -165,14 +180,40 @@ uint8_t droughtConditionsRecurse(uint8_t ledPixel, uint8_t sinBeat){
   }
   // Set River C & Stream 3 & 2
   if(ledPixel >= NUM_LEDS_RIVER_A + NUM_LEDS_RIVER_B && ledPixel < NUM_LEDS_RIVER_A + NUM_LEDS_RIVER_B + NUM_LEDS_RIVER_C + NUM_LEDS_STREAM_3 + NUM_LEDS_STREAM_2){
-    ledStrip[ledPixel] = CHSV(0, 255, sinBeat);
-    FastLED.show();
+    if(ledPixel == 86 ||
+        ledPixel == 87 ||
+        ledPixel == 88 ||
+        ledPixel == 89 ||
+        ledPixel == 90 ||
+        ledPixel == 91 ||
+        ledPixel == 92 ||
+        ledPixel == 93 ||
+        ledPixel == 104 ||
+        ledPixel == 105 ||
+        ledPixel == 106 ||
+        ledPixel == 107 ||
+        ledPixel == 108){
+      ledStrip[ledPixel] = CRGB::Black;
+      FastLED.show();
+    } else {
+      ledStrip[ledPixel] = CHSV(0, 255, sinBeat);
+      FastLED.show();
+    }
     return (ledPixel + 1);
   }
   // Set Stream 1
   if(ledPixel >= NUM_LEDS_RIVER_A + NUM_LEDS_RIVER_B + NUM_LEDS_RIVER_C + NUM_LEDS_STREAM_3 + NUM_LEDS_STREAM_2 && ledPixel < NUM_LEDS_TOTAL){
-    ledStrip[ledPixel] = CHSV(160, 255, sinBeat);
-    FastLED.show();
+    if(ledPixel == 115 ||
+        ledPixel == 116 ||
+        ledPixel == 117 ||
+        ledPixel == 118 ||
+        ledPixel == 119){
+      ledStrip[ledPixel] = CRGB::Black;
+      FastLED.show();
+    } else {
+      ledStrip[ledPixel] = CHSV(160, 255, sinBeat);
+      FastLED.show();
+    }
     return (ledPixel + 1);
   }
   return 0;
