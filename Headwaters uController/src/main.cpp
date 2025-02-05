@@ -44,17 +44,22 @@ void loop() {
   updateButtons();
   turnOnButtonLEDs();
   
+  // Commented out because some LEDs would flicker due to the
+  // constant redrawing of them? I don't understand this.
   // Creating the sin wave to adjust the brightness to a wave-like effect.
   // "Recursing" through the whole LED strip.
   switch(climateCondition){
     case 0:
       pixelLoc = normalConditionsRecurse(pixelLoc, (beatsin8(35, 100, 200, 0, 0)));
+      //normalConditions();
       break;
     case 1:
       pixelLoc = snowConditionsRecurse(pixelLoc, (beatsin8(60, 150, 255, 0, 0)));
+      //snowConditions();
       break;
     case 2:
-      pixelLoc = droughtConditionsRecurse(pixelLoc, (beatsin8(20, 50, 115, 0, 0)));
+      pixelLoc = droughtConditionsRecurse(pixelLoc, (beatsin8(20, 50, 200, 0, 0)));
+      //droughtConditions();
       break;
   }
 
@@ -85,15 +90,15 @@ void loop() {
       climateCondition = 0;
       Serial.println("Climate Condition: Normal");
       //testLEDs();
-      //normalConditions();
+      normalConditions();
     }else{
       climateCondition++;
       if(climateCondition == 1){
         Serial.println("Climate Conditions: High Snowpack");
-        //snowConditions();
+        snowConditions();
       }else if(climateCondition == 2){
         Serial.println("Climate Conditions: Dought");
-        //droughtConditions();
+        droughtConditions();
       }
     }
     // timer.setTime(timeValue);
