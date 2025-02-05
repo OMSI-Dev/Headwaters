@@ -48,20 +48,20 @@ void loop() {
   // constant redrawing of them? I don't understand this.
   // Creating the sin wave to adjust the brightness to a wave-like effect.
   // "Recursing" through the whole LED strip.
-  switch(climateCondition){
-    case 0:
-      pixelLoc = normalConditionsRecurse(pixelLoc, (beatsin8(35, 100, 200, 0, 0)));
-      //normalConditions();
-      break;
-    case 1:
-      pixelLoc = snowConditionsRecurse(pixelLoc, (beatsin8(60, 150, 255, 0, 0)));
-      //snowConditions();
-      break;
-    case 2:
-      pixelLoc = droughtConditionsRecurse(pixelLoc, (beatsin8(20, 50, 200, 0, 0)));
-      //droughtConditions();
-      break;
-  }
+  // switch(climateCondition){
+  //   case 0:
+  //     //pixelLoc = normalConditionsRecurse(pixelLoc, (beatsin8(35, 100, 200, 0, 0)));
+  //     normalConditions();
+  //     break;
+  //   case 1:
+  //     //pixelLoc = snowConditionsRecurse(pixelLoc, (beatsin8(60, 150, 255, 0, 0)));
+  //     snowConditions();
+  //     break;
+  //   case 2:
+  //     //pixelLoc = droughtConditionsRecurse(pixelLoc, (beatsin8(20, 50, 200, 0, 0)));
+  //     droughtConditions();
+  //     break;
+  // }
 
 // Commented out because in order to light up the LEDs on
 // the buttons, this pin has to alwasy be turned on.
@@ -166,6 +166,7 @@ void loop() {
   if(precip3Button.pressed()){
     turnOffButtonLEDs();
     printPrecipitation(climateCondition, 3);
+    //printerTest();
     //printPrecipitationSerial(climateCondition, 3);
     turnOnButtonLEDs();
   }

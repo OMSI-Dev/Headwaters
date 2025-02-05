@@ -120,8 +120,8 @@ void printPrecipitation(uint8_t climate, uint8_t precip){
             printer.println("Climate Condition: Drought");
             break;
     }
-
     printCurrentSample(precipitations[(climate*2 + climate) + (precip-1)][1], precipitations[(climate*2 + climate) + (precip-1)][2]);
+    printer.feed(5);
 }
 
 // Print a specific stream's data under current climate condition.
@@ -157,6 +157,7 @@ void printStream(uint8_t climate, uint8_t strm){
     }
 
     printCurrentSample(streams[(climate*2 + climate) + (strm-1)][1], streams[(climate*2 + climate) + (strm-1)][2]);
+    printer.feed(5);
 }
 
 // Print a specific river's data under current climate condition.
@@ -189,6 +190,7 @@ void printRiver(uint8_t climate, char rvr){
     }
 
     printCurrentSample(rivers[(climate*2 + climate) + (river-1)][1], rivers[(climate*2 + climate) + (river-1)][2]);
+    printer.feed(5);
 }
 
 // Functions for testing with a computer, print to Serial instead of Thermal Printer.
