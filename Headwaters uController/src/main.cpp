@@ -95,18 +95,21 @@ void loop() {
   // }
 
   if(droughtButton.pressed() && climateCondition != 2) {
-    Serial.println("In drought mode.");
+    //Serial.println("In drought mode.");
     climateCondition = 2;
+    droughtConditions();
   }
 
   if(snowpackButton.pressed() && climateCondition != 1) {
-    Serial.println("In snowpack mode.");
+    //Serial.println("In snowpack mode.");
     climateCondition = 1;
+    snowConditions();
   }
 
   if( ( droughtButton.released() || snowpackButton.released() ) && climateCondition != 0) {
-    Serial.println("In normal mode.");
+    //Serial.println("In normal mode.");
     climateCondition = 0;
+    normalConditions();
   }
 
 // When a button is pressed, all the buttons' LEDs shut off until
