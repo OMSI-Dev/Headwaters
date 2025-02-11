@@ -9,7 +9,8 @@ uint16_t lastTimeItHappened = 0;
 uint8_t howLongItsBeen;
 
 // Define all pins (change where needed).
-#define MODE_PIN 2
+#define DROUGHT_PIN 2
+//#define SNOWPACK_PIN 3
 #define STREAM1_PIN 4
 #define STREAM2_PIN 6
 #define STREAM3_PIN 8
@@ -22,7 +23,6 @@ uint8_t howLongItsBeen;
 #define FACILITATOR_PIN 14
 
 // Define all pins for the LED rings on the buttons.
-#define MODE_LED 3
 #define STREAM_1_LED 5
 #define STREAM_2_LED 7
 #define STREAM_3_LED 9
@@ -34,7 +34,8 @@ uint8_t howLongItsBeen;
 #define PRECIP_3_LED 22
 
 // Create all button objects.
-Bounce2::Button modeButton = Bounce2::Button();
+Bounce2::Button droughtButton = Bounce2::Button();
+//Bounce2::Button snowpackButton = Bounce2::Button();
 Bounce2::Button stream1Button = Bounce2::Button();
 Bounce2::Button stream2Button = Bounce2::Button();
 Bounce2::Button stream3Button = Bounce2::Button();
@@ -48,7 +49,8 @@ Bounce2::Button facilitatorButton = Bounce2::Button();
 
 bool setupButtons(){
 // Attach each button object to it's correct pin.
-  modeButton.attach(MODE_PIN, INPUT_PULLUP);
+  droughtButton.attach(DROUGHT_PIN, INPUT_PULLUP);
+  //snowpackButton.attach(SNOWPACK_PIN, INPUT_PULLUP);
   stream1Button.attach(STREAM1_PIN, INPUT_PULLUP);
   stream2Button.attach(STREAM2_PIN, INPUT_PULLUP);
   stream3Button.attach(STREAM3_PIN, INPUT_PULLUP);
@@ -61,7 +63,8 @@ bool setupButtons(){
   facilitatorButton.attach(FACILITATOR_PIN, INPUT_PULLUP);
 
 // Debounce interval in milliseconds.
-  modeButton.interval(5);
+  droughtButton.interval(5);
+  //snowpackButton.interval(5);
   stream1Button.interval(5);
   stream2Button.interval(5);
   stream3Button.interval(5);
@@ -74,7 +77,8 @@ bool setupButtons(){
   facilitatorButton.interval(5);
 
 // Indicate that the low state corresponds to phsyically pressing the button.
-  modeButton.setPressedState(LOW); 
+  droughtButton.setPressedState(LOW);
+  //snowpackButton.setPressedState(LOW);
   stream1Button.setPressedState(LOW);
   stream2Button.setPressedState(LOW);
   stream3Button.setPressedState(LOW);
@@ -87,7 +91,6 @@ bool setupButtons(){
   facilitatorButton.setPressedState(LOW);
 
 // Setting the digital pins for the LED rings on the buttons
-  pinMode(MODE_LED, OUTPUT);
   pinMode(STREAM_1_LED, OUTPUT);
   pinMode(STREAM_2_LED, OUTPUT);
   pinMode(STREAM_3_LED, OUTPUT);
@@ -99,7 +102,7 @@ bool setupButtons(){
   pinMode(PRECIP_3_LED, OUTPUT);
 
 // Check that pins got correctly attached.
-  if(modeButton.getPin() == MODE_PIN &&
+  if(droughtButton.getPin() == DROUGHT_PIN &&
     stream1Button.getPin() == STREAM1_PIN &&
     stream2Button.getPin() == STREAM2_PIN &&
     stream3Button.getPin() == STREAM3_PIN &&
@@ -119,7 +122,8 @@ bool setupButtons(){
 // Function to update the buttons.
 // Should be called at the beginning of each loop.
 void updateButtons(){
-  modeButton.update();
+  droughtButton.update();
+  //snowpackButton.update();
   stream1Button.update();
   stream2Button.update();
   stream3Button.update();
@@ -133,7 +137,6 @@ void updateButtons(){
 }
 
 void turnOnButtonLEDs(){
-  digitalWrite(MODE_LED, HIGH);
   digitalWrite(STREAM_1_LED, HIGH);
   digitalWrite(STREAM_2_LED, HIGH);
   digitalWrite(STREAM_3_LED, HIGH);
@@ -146,7 +149,6 @@ void turnOnButtonLEDs(){
 }
 
 void turnOffButtonLEDs(){
-  digitalWrite(MODE_LED, LOW);
   digitalWrite(STREAM_1_LED, LOW);
   digitalWrite(STREAM_2_LED, LOW);
   digitalWrite(STREAM_3_LED, LOW);

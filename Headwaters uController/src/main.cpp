@@ -85,25 +85,40 @@ void loop() {
 
 // Cycle through the climate conditions as mode button is pressed.
 // Update LED colors based on the climate condition.
-  if(modeButton.pressed()){
-    if(climateCondition >= 2){
-      climateCondition = 0;
-      Serial.println("Climate Condition: Normal");
-      //testLEDs();
-      normalConditions();
-    }else{
-      climateCondition++;
-      if(climateCondition == 1){
-        Serial.println("Climate Conditions: High Snowpack");
-        snowConditions();
-      }else if(climateCondition == 2){
-        Serial.println("Climate Conditions: Dought");
-        droughtConditions();
-      }
-    }
-    // timer.setTime(timeValue);
-    // timer.restart();
+  // if(modeButton.pressed()){
+  //   if(climateCondition >= 2){
+  //     climateCondition = 0;
+  //     Serial.println("Climate Condition: Normal");
+  //     //testLEDs();
+  //     normalConditions();
+  //   }else{
+  //     climateCondition++;
+  //     if(climateCondition == 1){
+  //       Serial.println("Climate Conditions: High Snowpack");
+  //       snowConditions();
+  //     }else if(climateCondition == 2){
+  //       Serial.println("Climate Conditions: Dought");
+  //       droughtConditions();
+  //     }
+  //   }
+  //   // timer.setTime(timeValue);
+  //   // timer.restart();
+  // }
+
+  if(droughtButton.pressed()) {
+    Serial.println("In drought mode.");
+    climateCondition = 2;
   }
+
+  // if(snowpackButton.pressed()) {
+  //   Serial.println("In snowpack mode.");
+  //   climateCondition = 1;
+  // }
+  
+  // if(!droughtButton.pressed() && !snowpackButton.pressed()) {
+  //   Serial.println("In normal mode.");
+  //   climateCondition = 0;
+  // }
 
 // When a button is pressed, all the buttons' LEDs shut off until
 // the function to print is completed.
