@@ -10,7 +10,7 @@ uint8_t howLongItsBeen;
 
 // Define all pins (change where needed).
 #define DROUGHT_PIN 2
-//#define SNOWPACK_PIN 3
+#define SNOWPACK_PIN 3
 #define STREAM1_PIN 4
 #define STREAM2_PIN 6
 #define STREAM3_PIN 8
@@ -35,7 +35,7 @@ uint8_t howLongItsBeen;
 
 // Create all button objects.
 Bounce2::Button droughtButton = Bounce2::Button();
-//Bounce2::Button snowpackButton = Bounce2::Button();
+Bounce2::Button snowpackButton = Bounce2::Button();
 Bounce2::Button stream1Button = Bounce2::Button();
 Bounce2::Button stream2Button = Bounce2::Button();
 Bounce2::Button stream3Button = Bounce2::Button();
@@ -50,7 +50,7 @@ Bounce2::Button facilitatorButton = Bounce2::Button();
 bool setupButtons(){
 // Attach each button object to it's correct pin.
   droughtButton.attach(DROUGHT_PIN, INPUT_PULLUP);
-  //snowpackButton.attach(SNOWPACK_PIN, INPUT_PULLUP);
+  snowpackButton.attach(SNOWPACK_PIN, INPUT_PULLUP);
   stream1Button.attach(STREAM1_PIN, INPUT_PULLUP);
   stream2Button.attach(STREAM2_PIN, INPUT_PULLUP);
   stream3Button.attach(STREAM3_PIN, INPUT_PULLUP);
@@ -64,7 +64,7 @@ bool setupButtons(){
 
 // Debounce interval in milliseconds.
   droughtButton.interval(5);
-  //snowpackButton.interval(5);
+  snowpackButton.interval(5);
   stream1Button.interval(5);
   stream2Button.interval(5);
   stream3Button.interval(5);
@@ -78,7 +78,7 @@ bool setupButtons(){
 
 // Indicate that the low state corresponds to phsyically pressing the button.
   droughtButton.setPressedState(LOW);
-  //snowpackButton.setPressedState(LOW);
+  snowpackButton.setPressedState(LOW);
   stream1Button.setPressedState(LOW);
   stream2Button.setPressedState(LOW);
   stream3Button.setPressedState(LOW);
@@ -103,6 +103,7 @@ bool setupButtons(){
 
 // Check that pins got correctly attached.
   if(droughtButton.getPin() == DROUGHT_PIN &&
+    snowpackButton.getPin() == SNOWPACK_PIN &&
     stream1Button.getPin() == STREAM1_PIN &&
     stream2Button.getPin() == STREAM2_PIN &&
     stream3Button.getPin() == STREAM3_PIN &&
@@ -123,7 +124,7 @@ bool setupButtons(){
 // Should be called at the beginning of each loop.
 void updateButtons(){
   droughtButton.update();
-  //snowpackButton.update();
+  snowpackButton.update();
   stream1Button.update();
   stream2Button.update();
   stream3Button.update();
@@ -160,10 +161,10 @@ void turnOffButtonLEDs(){
   digitalWrite(PRECIP_3_LED, LOW);
 }
 
-void fadeButtons(){
-  howLongItsBeen = millis() - lastTimeItHappened;
-  if( howLongItsBeen >= howLongToWait){
-    // Fade buttons
-    lastTimeItHappened = millis();
-  }
-}
+// void fadeButtons(){
+//   howLongItsBeen = millis() - lastTimeItHappened;
+//   if( howLongItsBeen >= howLongToWait){
+//     // Fade buttons
+//     lastTimeItHappened = millis();
+//   }
+// }

@@ -63,21 +63,10 @@ void loop() {
   //     break;
   // }
 
-// Commented out because in order to light up the LEDs on
-// the buttons, this pin has to alwasy be turned on.
-// // Blink LED on Teensy every second while running
-//   EVERY_N_SECONDS( 1 ){
-//     if(digitalRead(13) == HIGH){
-//       digitalWrite(13, LOW);
-//     }else{
-//       digitalWrite(13, HIGH);
-//     }
-//   }
-
 // Check if the printer has paper each loop.
 // If it doesn't, make all the rivers and streams red.
 // This will also be triggered if the printer is not connected.
-// ****** Doesn't work? (function itself says it might not work on all printers)
+// ****** Doesn't work? (function doc says it might not work on all printers)
 // if(!checkPrinterPaper()){
 //   Serial.println("Printer needs paper.");
 //   redStream();
@@ -105,20 +94,20 @@ void loop() {
   //   // timer.restart();
   // }
 
-  if(droughtButton.pressed()) {
+  if(droughtButton.pressed() && climateCondition != 2) {
     Serial.println("In drought mode.");
     climateCondition = 2;
   }
 
-  // if(snowpackButton.pressed()) {
-  //   Serial.println("In snowpack mode.");
-  //   climateCondition = 1;
-  // }
-  
-  // if(!droughtButton.pressed() && !snowpackButton.pressed()) {
-  //   Serial.println("In normal mode.");
-  //   climateCondition = 0;
-  // }
+  if(snowpackButton.pressed() && climateCondition != 1) {
+    Serial.println("In snowpack mode.");
+    climateCondition = 1;
+  }
+
+  if( ( droughtButton.released() || snowpackButton.released() ) && climateCondition != 0) {
+    Serial.println("In normal mode.");
+    climateCondition = 0;
+  }
 
 // When a button is pressed, all the buttons' LEDs shut off until
 // the function to print is completed.
