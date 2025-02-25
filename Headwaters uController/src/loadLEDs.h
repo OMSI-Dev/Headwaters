@@ -174,10 +174,13 @@ uint8_t droughtConditionsRecurse(uint8_t ledPixel, uint8_t sinBeat){
 void droughtConditions(){
   fill_solid(stream1_array, NUM_LEDS_STREAM_1, CRGB::Blue);
   fill_solid(stream2_array, NUM_LEDS_STREAM_2, CRGB::Red);
+  fadeToBlackBy(stream2_array, NUM_LEDS_STREAM_2, 180);
   fill_solid(stream3_array, NUM_LEDS_STREAM_3, CRGB::Red);
+  fadeToBlackBy(stream3_array, NUM_LEDS_STREAM_3, 190);
   fill_solid(riverA_array, NUM_LEDS_RIVER_A, CRGB::Blue);
   fill_solid(riverB_array, NUM_LEDS_RIVER_B, CRGB::Green);
   fill_solid(riverC_array, NUM_LEDS_RIVER_C, CRGB::Red);
+  fadeToBlackBy(riverC_array, NUM_LEDS_RIVER_C, 180);
   FastLED.show();
 }
 
