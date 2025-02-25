@@ -174,13 +174,45 @@ uint8_t droughtConditionsRecurse(uint8_t ledPixel, uint8_t sinBeat){
 void droughtConditions(){
   fill_solid(stream1_array, NUM_LEDS_STREAM_1, CRGB::Blue);
   fill_solid(stream2_array, NUM_LEDS_STREAM_2, CRGB::Red);
-  fadeToBlackBy(stream2_array, NUM_LEDS_STREAM_2, 210);
+  stream2_array[0] = CRGB::Black;
+  stream2_array[1] = CRGB::Black;
+  stream2_array[2] = CRGB::Black;
+  stream2_array[3] = CRGB::Black;
+  stream2_array[4] = CHSV(0, 255, 30);
+  stream2_array[5] = CHSV(0, 255, 50);
+  stream2_array[6] = CHSV(0, 255, 100);
+  stream2_array[7] = CHSV(0, 255, 150);
+  stream2_array[8] = CHSV(0, 255, 200);
   fill_solid(stream3_array, NUM_LEDS_STREAM_3, CRGB::Red);
-  fadeToBlackBy(stream3_array, NUM_LEDS_STREAM_3, 205);
+  stream3_array[0] = CRGB::Black;
+  stream3_array[1] = CRGB::Black;
+  stream3_array[2] = CRGB::Black;
+  stream3_array[3] = CRGB::Black;
+  stream3_array[4] = CRGB::Black;
+  stream3_array[5] = CHSV(0, 255, 30);
+  stream3_array[6] = CHSV(0, 255, 50);
+  stream3_array[7] = CHSV(0, 255, 75);
+  stream3_array[8] = CHSV(0, 255, 100);
+  stream3_array[9] = CHSV(0, 255, 125);
+  stream3_array[10] = CHSV(0, 255, 150);
+  stream3_array[11] = CHSV(0, 255, 175);
+  stream3_array[12] = CHSV(0, 255, 200);
+  stream3_array[13] = CHSV(0, 255, 225);
   fill_solid(riverA_array, NUM_LEDS_RIVER_A, CRGB::Blue);
   fill_solid(riverB_array, NUM_LEDS_RIVER_B, CRGB::Green);
   fill_solid(riverC_array, NUM_LEDS_RIVER_C, CRGB::Red);
-  fadeToBlackBy(riverC_array, NUM_LEDS_RIVER_C, 180);
+  riverC_array[NUM_LEDS_RIVER_C] = CRGB::Black;
+  riverC_array[NUM_LEDS_RIVER_C - 1] = CRGB::Black;
+  riverC_array[NUM_LEDS_RIVER_C - 2] = CRGB::Black;
+  riverC_array[NUM_LEDS_RIVER_C - 3] = CRGB::Black;
+  riverC_array[NUM_LEDS_RIVER_C - 4] = CRGB::Black;
+  riverC_array[NUM_LEDS_RIVER_C - 5] = CHSV(0, 255, 30);
+  riverC_array[NUM_LEDS_RIVER_C - 6] = CHSV(0, 255, 50);
+  riverC_array[NUM_LEDS_RIVER_C - 7] = CHSV(0, 255, 100);
+  riverC_array[NUM_LEDS_RIVER_C - 8] = CHSV(0, 255, 150);
+  riverC_array[NUM_LEDS_RIVER_C - 9] = CHSV(0, 255, 175);
+  riverC_array[NUM_LEDS_RIVER_C - 10] = CHSV(0, 255, 200);
+  riverC_array[NUM_LEDS_RIVER_C - 11] = CHSV(0, 255, 225);
   FastLED.show();
 }
 

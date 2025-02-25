@@ -94,16 +94,16 @@ void loop() {
   //   // timer.restart();
   // }
 
-  if(droughtButton.pressed() && climateCondition != 2) {
-    //Serial.println("In drought mode.");
+  if(droughtButton.pressed() && climateCondition != 1) {
+    //Serial.println("In snowpack mode");
     climateCondition = 2;
-    droughtConditions();
+    snowConditions();
   }
 
-  if(snowpackButton.pressed() && climateCondition != 1) {
-    //Serial.println("In snowpack mode.");
+  if(snowpackButton.pressed() && climateCondition != 2) {
+    //Serial.println("In drought mode.");
     climateCondition = 1;
-    snowConditions();
+    droughtConditions();
   }
 
   if( ( droughtButton.released() || snowpackButton.released() ) && climateCondition != 0) {
