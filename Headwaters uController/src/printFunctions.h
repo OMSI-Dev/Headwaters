@@ -32,9 +32,9 @@ void setupPrinter(){
 // Row 3 is Stream 1, 2, and 3 under drought conditions (climate condition 2)
 // {climate condition, mean watershed elevation, isotope oxygen_18 levels}
 uint16_t streams[9][3] = {
-    {0, 1200, 1}, {0, 950, 4}, {0, 700, 6},
-    {1, 1200, 1}, {1, 950, 3}, {1, 700, 5},
-    {2, 1200, 3}, {2, 950, 6}, {2, 700, 9}
+    {0, 1200, 1}, {0, 1200, 4}, {0, 600, 6},
+    {1, 1200, 1}, {1, 1200, 3}, {1, 600, 5},
+    {2, 1200, 3}, {2, 1200, 6}, {2, 600, 9}
 };
 
 // Rivers: 
@@ -43,9 +43,9 @@ uint16_t streams[9][3] = {
 // Row 3 is River A, B, and C under drought conditions (climate condiditon 2)
 // {climate condition, mean watershed elevation, isotope oxygen_18 levels}
 uint16_t rivers[9][3] = {
-    {0, 1050, 2}, {0, 900, 3}, {0, 750, 5},
-    {1, 1050, 1}, {1, 900, 3}, {1, 750, 4},
-    {2, 1050, 3}, {2, 900, 5}, {2, 750, 8}
+    {0, 1200, 2}, {0, 800, 3}, {0, 400, 5},
+    {1, 1200, 1}, {1, 800, 3}, {1, 400, 4},
+    {2, 1200, 3}, {2, 800, 5}, {2, 400, 8}
 };
 
 // Precipitation: 
