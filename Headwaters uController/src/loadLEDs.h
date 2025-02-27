@@ -201,22 +201,23 @@ void droughtConditions(){
   fill_solid(riverA_array, NUM_LEDS_RIVER_A, CRGB::Blue);
   fill_solid(riverB_array, NUM_LEDS_RIVER_B, CRGB::Green);
   fill_solid(riverC_array, NUM_LEDS_RIVER_C, CRGB::Red);
-  riverC_array[NUM_LEDS_RIVER_C] = CRGB::Black;
-  riverC_array[NUM_LEDS_RIVER_C - 1] = CRGB::Black;
-  riverC_array[NUM_LEDS_RIVER_C - 2] = CRGB::Black;
-  riverC_array[NUM_LEDS_RIVER_C - 3] = CRGB::Black;
-  riverC_array[NUM_LEDS_RIVER_C - 4] = CRGB::Black;
-  riverC_array[NUM_LEDS_RIVER_C - 5] = CRGB::Black;
-  riverC_array[NUM_LEDS_RIVER_C - 7] = CRGB::Black;
-  riverC_array[NUM_LEDS_RIVER_C - 8] = CRGB::Black;
-  riverC_array[NUM_LEDS_RIVER_C - 9] = CRGB::Black;
-  riverC_array[NUM_LEDS_RIVER_C - 10] = CHSV(0, 255, 30);
-  riverC_array[NUM_LEDS_RIVER_C - 11] = CHSV(0, 255, 50);
-  riverC_array[NUM_LEDS_RIVER_C - 12] = CHSV(0, 255, 100);
-  riverC_array[NUM_LEDS_RIVER_C - 13] = CHSV(0, 255, 150);
-  riverC_array[NUM_LEDS_RIVER_C - 14] = CHSV(0, 255, 175);
-  riverC_array[NUM_LEDS_RIVER_C - 15] = CHSV(0, 255, 200);
-  riverC_array[NUM_LEDS_RIVER_C - 16] = CHSV(0, 255, 225);
+  //  River in drought should be full red, adjusted to match new request.
+  // riverC_array[NUM_LEDS_RIVER_C] = CRGB::Black;
+  // riverC_array[NUM_LEDS_RIVER_C - 1] = CRGB::Black;
+  // riverC_array[NUM_LEDS_RIVER_C - 2] = CRGB::Black;
+  // riverC_array[NUM_LEDS_RIVER_C - 3] = CRGB::Black;
+  // riverC_array[NUM_LEDS_RIVER_C - 4] = CRGB::Black;
+  // riverC_array[NUM_LEDS_RIVER_C - 5] = CRGB::Black;
+  // riverC_array[NUM_LEDS_RIVER_C - 7] = CRGB::Black;
+  // riverC_array[NUM_LEDS_RIVER_C - 8] = CRGB::Black;
+  // riverC_array[NUM_LEDS_RIVER_C - 9] = CRGB::Black;
+  // riverC_array[NUM_LEDS_RIVER_C - 10] = CHSV(0, 255, 30);
+  // riverC_array[NUM_LEDS_RIVER_C - 11] = CHSV(0, 255, 50);
+  // riverC_array[NUM_LEDS_RIVER_C - 12] = CHSV(0, 255, 100);
+  // riverC_array[NUM_LEDS_RIVER_C - 13] = CHSV(0, 255, 150);
+  // riverC_array[NUM_LEDS_RIVER_C - 14] = CHSV(0, 255, 175);
+  // riverC_array[NUM_LEDS_RIVER_C - 15] = CHSV(0, 255, 200);
+  // riverC_array[NUM_LEDS_RIVER_C - 16] = CHSV(0, 255, 225);
   FastLED.show();
 }
 
