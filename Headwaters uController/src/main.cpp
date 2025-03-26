@@ -12,8 +12,8 @@ uint16_t timeValue = 1000;
 
 // Climate condition modes:
 // 0 = Normal
-// 1 = High Snowpack
-// 2 = Drought
+// 1 = Drought
+// 2 = High Snowpack
 uint8_t climateCondition = 3;
 
 uint8_t pixelLoc = 0;
@@ -96,13 +96,13 @@ void loop() {
 
   if(droughtButton.pressed() && climateCondition != 1) {
     //Serial.println("In snowpack mode");
-    climateCondition = 2;
+    climateCondition = 1;
     snowConditions();
   }
 
   if(snowpackButton.pressed() && climateCondition != 2) {
     //Serial.println("In drought mode.");
-    climateCondition = 1;
+    climateCondition = 2;
     droughtConditions();
   }
 
